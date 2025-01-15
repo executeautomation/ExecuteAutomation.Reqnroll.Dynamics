@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>ExecuteAutomation.Reqnroll.Dynamics</RootNamespace>
+        <Title>ExecuteAutomation.Reqnroll.Dynamics</Title>
+        <Authors>ExecuteAutomation, KarthikKK</Authors>
+        <Description>Package to handle Reqnroll tables with Dynamic types</Description>
+        <PackageProjectUrl>https://github.com/executeautomation/ExecuteAutomation.Reqnroll.Dynamics</PackageProjectUrl>
+        <PackageIcon>EA-Icon.png</PackageIcon>
+        <RepositoryUrl>https://github.com/executeautomation/ExecuteAutomation.Reqnroll.Dynamics</RepositoryUrl>
+        <PackageTags>Reqnroll,executeautomation,dynamictables</PackageTags>
+        <PackageReleaseNotes>First Release of Reqnroll with Dynamic table supports</PackageReleaseNotes>
+        <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Dynamitey" Version="3.0.3" />
+        <PackageReference Include="Reqnroll" Version="2.2.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="EA-Icon.png">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+      </None>
+      <None Include="LICENSE.txt">
+		  <Pack>True</Pack>
+		  <PackagePath>\</PackagePath>
+      </None>
+    </ItemGroup>
+
+</Project>
