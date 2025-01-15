@@ -14,6 +14,7 @@
         <PackageTags>Reqnroll,executeautomation,dynamictables</PackageTags>
         <PackageReleaseNotes>First Release of Reqnroll with Dynamic table supports</PackageReleaseNotes>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
 
     <ItemGroup>
@@ -25,6 +26,10 @@
       <None Update="EA-Icon.png">
         <Pack>True</Pack>
         <PackagePath></PackagePath>
+      </None>
+      <None Include="README.md">
+        <Pack>True</Pack>
+        <PackagePath>\</PackagePath>
       </None>
       <None Include="LICENSE.txt">
 		  <Pack>True</Pack>
