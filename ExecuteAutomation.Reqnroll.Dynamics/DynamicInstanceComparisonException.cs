@@ -4,6 +4,7 @@ namespace ExecuteAutomation.Reqnroll.Dynamics;
 using AutoFixture;
 using System.Dynamic;
 using System.Text.RegularExpressions;
+using System.Text.Json;
 
 public class DynamicInstanceComparisonException : Exception
 {
@@ -124,22 +125,79 @@ public static class AutoFixtureTableExtensions
     {
         var lowerHeader = header.ToLowerInvariant();
         
+        // Collection types
+        if (IsCollectionHeader(header))
+        {
+            string itemType = InferCollectionItemType(header);
+            return GenerateCollectionValue(itemType);
+        }
+        
+        // Email type
         if (lowerHeader.Contains("email"))
             return _fixture.Create<EmailAddress>().Address;
         
+        // Name types - handle first/last name differently from general names
+        if (lowerHeader.Contains("firstname"))
+            return _fixture.Create<PersonName>().First;
+            
+        if (lowerHeader.Contains("lastname"))
+            return _fixture.Create<PersonName>().Last;
+            
         if (lowerHeader.Contains("name"))
-            return _fixture.Create<string>();
+            return _fixture.Create<PersonName>().ToString();
         
+        // Date and time types
+        if (lowerHeader.Contains("datetime"))
+            return _fixture.Create<DateTime>().ToString("yyyy-MM-dd HH:mm:ss");
+            
         if (lowerHeader.Contains("date") || lowerHeader.Contains("time"))
             return _fixture.Create<DateTime>().ToString("yyyy-MM-dd");
         
+        // Number types
+        if (lowerHeader.Contains("decimal"))
+            return _fixture.Create<decimal>().ToString();
+            
+        if (lowerHeader.Contains("double"))
+            return _fixture.Create<double>().ToString();
+            
+        if (lowerHeader.Contains("int") || lowerHeader.EndsWith("count") || lowerHeader.EndsWith("number"))
+            return _fixture.Create<int>().ToString();
+        
+        // Boolean type
+        if (lowerHeader.Contains("bool") || lowerHeader.StartsWith("is") || lowerHeader.StartsWith("has"))
+            return _fixture.Create<bool>().ToString();
+        
+        // Phone type
         if (lowerHeader.Contains("phone"))
             return _fixture.Create<PhoneNumber>().Number;
         
+        // Guid type
+        if (lowerHeader.Contains("guid"))
+            return _fixture.Create<Guid>().ToString();
+        
+        // URL/URI type
+        if (lowerHeader.Contains("url") || lowerHeader.Contains("uri"))
+            return _fixture.Create<Uri>().ToString();
+        
+        // Address types
+        if (lowerHeader.Contains("address"))
+            return _fixture.Create<StreetAddress>().ToString();
+            
+        if (lowerHeader.Contains("city"))
+            return _fixture.Create<City>().Name;
+            
+        if (lowerHeader.Contains("zipcode") || lowerHeader.Contains("postalcode"))
+            return _fixture.Create<ZipCode>().ToString();
+        
+        // Credit card type
+        if (lowerHeader.Contains("credit") || lowerHeader.Contains("card") || lowerHeader.Contains("payment"))
+            return $"{_fixture.Create<int>() % 9000 + 1000}-{_fixture.Create<int>() % 9000 + 1000}-{_fixture.Create<int>() % 9000 + 1000}-{_fixture.Create<int>() % 9000 + 1000}";
+        
+        // ID type
         if (lowerHeader.Contains("id") || lowerHeader.EndsWith("id"))
             return _fixture.Create<int>().ToString();
         
-        // Default to string
+        // Default to string for any other type
         return _fixture.Create<string>();
     }
     
@@ -152,11 +210,21 @@ public static class AutoFixtureTableExtensions
             return entity.ToString();
         }
         
+        // Parse parameters for collection types
+        int collectionCount = 3; // Default
+        if (type.EndsWith("list") && !string.IsNullOrEmpty(parameters))
+        {
+            if (int.TryParse(parameters, out var count))
+                collectionCount = count;
+        }
+        
         switch (type.ToLowerInvariant())
         {
+            // String types
             case "string":
                 return _fixture.Create<string>();
             
+            // Number types
             case "int":
                 return _fixture.Create<int>().ToString();
             
@@ -166,27 +234,37 @@ public static class AutoFixtureTableExtensions
             case "double":
                 return _fixture.Create<double>().ToString();
             
+            // Date and time types
             case "date":
                 return _fixture.Create<DateTime>().ToString("yyyy-MM-dd");
             
             case "datetime":
                 return _fixture.Create<DateTime>().ToString("yyyy-MM-dd HH:mm:ss");
             
+            case "timespan":
+                return _fixture.Create<TimeSpan>().ToString();
+            
+            // Boolean type
             case "bool":
                 return _fixture.Create<bool>().ToString();
             
+            // Identifier types
             case "guid":
                 return _fixture.Create<Guid>().ToString();
             
+            // Contact types
             case "email":
                 return _fixture.Create<EmailAddress>().Address;
             
             case "phone":
                 return _fixture.Create<PhoneNumber>().Number;
             
+            // Web types
             case "url":
+            case "uri":
                 return _fixture.Create<Uri>().ToString();
             
+            // Name types
             case "name":
                 return _fixture.Create<PersonName>().ToString();
             
@@ -196,6 +274,7 @@ public static class AutoFixtureTableExtensions
             case "lastname":
                 return _fixture.Create<PersonName>().Last;
             
+            // Address types
             case "address":
                 return _fixture.Create<StreetAddress>().ToString();
             
@@ -203,10 +282,101 @@ public static class AutoFixtureTableExtensions
                 return _fixture.Create<City>().Name;
             
             case "zipcode":
+            case "postalcode":
                 return _fixture.Create<ZipCode>().ToString();
             
+            case "country":
+                return "United States";
+            
+            // Payment types
+            case "creditcard":
+                return $"{_fixture.Create<int>() % 9000 + 1000}-{_fixture.Create<int>() % 9000 + 1000}-{_fixture.Create<int>() % 9000 + 1000}-{_fixture.Create<int>() % 9000 + 1000}";
+            
+            // Collection types
+            case "stringlist":
+                return GenerateCollectionValue("stringlist", collectionCount);
+            
+            case "intlist":
+                return GenerateCollectionValue("intlist", collectionCount);
+            
+            case "guidlist":
+                return GenerateCollectionValue("guidlist", collectionCount);
+            
+            case "datelist":
+                return GenerateCollectionValue("datelist", collectionCount);
+            
+            // Default
             default:
                 return _fixture.Create<string>();
+        }
+    }
+
+    // Helper method to check if a header indicates a collection type
+    private static bool IsCollectionHeader(string header)
+    {
+        var lowerHeader = header.ToLowerInvariant();
+        return lowerHeader.EndsWith("list") || 
+               lowerHeader.EndsWith("array") || 
+               lowerHeader.EndsWith("collection") ||
+               lowerHeader.EndsWith("set") ||
+               lowerHeader.Contains("items");
+    }
+    
+    // Helper method to infer the item type from a collection header
+    private static string InferCollectionItemType(string header)
+    {
+        var lowerHeader = header.ToLowerInvariant();
+        
+        if (lowerHeader.Contains("string"))
+            return "stringlist";
+            
+        if (lowerHeader.Contains("int"))
+            return "intlist";
+            
+        if (lowerHeader.Contains("guid"))
+            return "guidlist";
+            
+        if (lowerHeader.Contains("date"))
+            return "datelist";
+            
+        // Default to string list
+        return "stringlist";
+    }
+    
+    // Helper method to generate randomized collection values as JSON strings
+    private static string GenerateCollectionValue(string itemType, int count = 3)
+    {
+        switch (itemType.ToLowerInvariant())
+        {
+            case "stringlist":
+                var strings = Enumerable.Range(0, count)
+                    .Select(_ => _fixture.Create<string>())
+                    .ToList();
+                return JsonSerializer.Serialize(strings);
+                
+            case "intlist":
+                var ints = Enumerable.Range(0, count)
+                    .Select(_ => _fixture.Create<int>())
+                    .ToList();
+                return JsonSerializer.Serialize(ints);
+                
+            case "guidlist":
+                var guids = Enumerable.Range(0, count)
+                    .Select(_ => _fixture.Create<Guid>())
+                    .ToList();
+                return JsonSerializer.Serialize(guids);
+                
+            case "datelist":
+                var dates = Enumerable.Range(0, count)
+                    .Select(_ => _fixture.Create<DateTime>())
+                    .ToList();
+                return JsonSerializer.Serialize(dates);
+                
+            default:
+                var defaultList = Enumerable.Range(0, count)
+                    .Select(_ => _fixture.Create<string>())
+                    .ToList();
+                return JsonSerializer.Serialize(defaultList);
         }
     }
 }
@@ -220,7 +390,12 @@ public class EmailAddress
 
 public class PhoneNumber
 {
-    public string Number => $"+{_fixture.Create<int>() % 100:D2} {_fixture.Create<int>() % 1000:D3} {_fixture.Create<int>() % 10000:D4}";
+    
+    string part1 = (_fixture.Create<int>() % 100).ToString("D2");
+    string part2 = (_fixture.Create<int>() % 1000).ToString("D3");
+    string part3 = (_fixture.Create<int>() % 10000).ToString("D4");
+
+    public string Number => $"{part1}{part2}{part3}";
     private static readonly Fixture _fixture = new Fixture();
 }
 
