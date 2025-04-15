@@ -1,16 +1,119 @@
 # ExecuteAutomation.Reqnroll.Dynamics
 
-**ExecuteAutomation.Reqnroll.Dynamics** is a powerful extension to enhance Reqnroll's Assist APIs, enabling seamless dynamic object creation and enhanced table manipulation for Reqnroll scenarios.
+A powerful library that enhances [Reqnroll](https://reqnroll.net/) (formerly SpecFlow) with dynamic data handling capabilities, simplifying how data is created and manipulated in Gherkin feature files.
 
 ---
 
 ## Features
 
-- **Dynamic Object Creation**: Convert Reqnroll tables directly into dynamic objects for simplified testing and validation.
-- **Enhanced Table Manipulation**: Effortlessly transform vertical tables into horizontal tables for more intuitive data handling.
-- **Customizable Behavior**: Fine-tune how the library processes Reqnroll tables for your specific testing needs.
-- **Table Transformation Utilities**: Filter, project, and create nested objects from Reqnroll tables.
-- **Async Support**: Use asynchronous methods for better integration with modern testing frameworks.
+### Core Dynamic Table Capabilities
+
+- **Dynamic Instance Creation**: Convert tables to dynamic objects
+  ```csharp
+  dynamic data = table.CreateDynamicInstance();
+  ```
+
+- **Dynamic Set Creation**: Convert tables to collections of dynamic objects
+  ```csharp
+  var items = table.CreateDynamicSet();
+  ```
+
+- **Dynamic Data Comparison**: Compare tables with dynamic objects or collections
+  ```csharp
+  table.CompareToDynamicInstance(instance);
+  table.CompareToDynamicSet(set);
+  ```
+
+- **Step Argument Transformations**: Built-in transformations for automated conversion
+  ```csharp
+  // In step definitions, tables are automatically transformed
+  public void GivenTheFollowingUsers(IEnumerable<object> users) { ... }
+  public void GivenAUser(dynamic user) { ... }
+  ```
+
+### Enhanced Table Manipulation
+
+- **Horizontal/Vertical Table Transformation**: Transform between table formats
+  ```csharp
+  var horizontalTable = CreateHorizontalTable(verticalTable);
+  ```
+
+- **Table Filtering**: Filter rows based on specific criteria
+  ```csharp
+  var filteredTable = table.FilterRows(row => row["Status"] == "Active");
+  ```
+
+- **Column Projection**: Create a new table with only specified columns
+  ```csharp
+  var projectedTable = table.SelectColumns("FirstName", "LastName");
+  ```
+
+- **Nested Object Creation**: Create hierarchical objects from tables with JSON data
+  ```csharp
+  var nestedObject = table.CreateNestedDynamicInstance();
+  ```
+
+### Async Support
+
+- **Asynchronous Operations**: Use async versions of all core methods
+  ```csharp
+  var dynamicObject = await table.CreateDynamicInstanceAsync();
+  var dynamicSet = await table.CreateDynamicSetAsync();
+  await table.CompareToDynamicInstanceAsync(instance);
+  ```
+
+### AutoFixture Integration
+
+- **Random Data Generation**: Create tables with auto-generated test data
+  ```gherkin
+  Given users with the following details:
+    | Username    | Email      | DateOfBirth | PhoneNumber |
+    | auto.string | auto.email | auto.date   | auto.phone  |
+    | _           | _          | _           | _           |
+  ```
+
+- **Type Inference**: Automatic type detection from column names
+  ```gherkin
+  # The underscore (_) will infer appropriate data types based on column names
+  | Username | Email | DateOfBirth | PhoneNumber |
+  | _        | _     | _           | _           |
+  ```
+
+- **Supported Data Types**:
+  - `auto.string` - Random string values
+  - `auto.int` - Random integer values
+  - `auto.decimal`, `auto.double` - Random numeric values
+  - `auto.date`, `auto.datetime` - Random date/time values
+  - `auto.bool` - Random boolean values
+  - `auto.guid` - Random GUIDs
+  - `auto.email` - Random email addresses
+  - `auto.phone` - Random phone numbers
+  - `auto.url` - Random URLs
+  - `auto.name`, `auto.firstname`, `auto.lastname` - Random name values
+  - `auto.address` - Random street addresses
+  - `auto.city` - Random city names
+  - `auto.zipcode` - Random ZIP/postal codes
+
+- **Custom Entity Generation**: Register your own domain entity generators
+  ```csharp
+  // In test setup
+  AutoFixtureTableExtensions.RegisterEntityType<User>("user");
+  AutoFixtureTableExtensions.RegisterEntityType<Product>("product");
+  
+  // Custom generator with specific logic
+  AutoFixtureTableExtensions.RegisterEntityGenerator<PremiumUser>("premium-user", 
+    () => new PremiumUser { Level = "Gold", ... });
+  ```
+
+- **Usage in Step Definitions**:
+  ```csharp
+  [Given(@"users with the following details:")]
+  public void GivenUsersWithTheFollowingDetails(Table table)
+  {
+      var users = table.CreateDynamicSetWithAutoFixture();
+      // Process users...
+  }
+  ```
 
 ---
 
@@ -36,50 +139,214 @@ Add the following line to your `.csproj` file:
 
 ---
 
-## Usage
+## Getting Started
+
+### Basic Usage
+
+1. Import the namespace in your step definition files:
+```csharp
+using ExecuteAutomation.Reqnroll.Dynamics;
+```
+
+2. Use the extension methods on Reqnroll `Table` objects:
+```csharp
+[Given(@"the following products:")]
+public void GivenTheFollowingProducts(Table table)
+{
+    var products = table.CreateDynamicSet();
+    // Use products in your test...
+}
+```
+
+### Using Random Data Generation
+
+1. Create feature files with auto-generated data:
+```gherkin
+Feature: User Registration
+
+Scenario: Register new users
+  Given users with the following details:
+    | Username    | Email      | DateOfBirth | PhoneNumber |
+    | auto.string | auto.email | auto.date   | auto.phone  |
+    | _           | _          | _           | _           |
+  When I register these users
+  Then all registrations should be successful
+```
+
+2. Register custom entity generators in your test setup:
+```csharp
+[BeforeTestRun]
+public static void SetupAutoFixture()
+{
+    AutoFixtureTableExtensions.RegisterEntityType<User>("user");
+    AutoFixtureTableExtensions.RegisterEntityType<Product>("product");
+}
+```
+
+---
+
+## Advanced Features
 
 ### Dynamic Object Creation
-You can convert Reqnroll tables into dynamic objects effortlessly:
+
+#### Creating from a Horizontal Table
+
 ```csharp
-var dynamicObject = table.CreateDynamicInstance();
+// Given a table:
+// | Name  | Age | IsActive |
+// | John  | 30  | true     |
+
+var person = table.CreateDynamicInstance();
+// person.Name == "John"
+// person.Age == 30 (int)
+// person.IsActive == true (bool)
 ```
 
-### Horizontal Table Transformation
-Transform vertical tables to horizontal tables for more intuitive handling:
+#### Creating from a Vertical Table
+
 ```csharp
-var horizontalTable = CreateHorizontalTable(verticalTable);
+// Given a table:
+// | Field    | Value  |
+// | Name     | John   |
+// | Age      | 30     |
+// | IsActive | true   |
+
+var person = table.CreateDynamicInstance();
+// person.Name == "John"
+// person.Age == 30 (int)
+// person.IsActive == true (bool)
 ```
 
-### Table Filtering
-Filter rows based on specific criteria:
+### Creating a Set of Dynamic Objects
+
 ```csharp
-var filteredTable = table.FilterRows(row => row["Status"] == "Active");
+// Given a table:
+// | Name  | Age | IsActive |
+// | John  | 30  | true     |
+// | Jane  | 25  | false    |
+// | Bob   | 45  | true     |
+
+var people = table.CreateDynamicSet();
+// people[0].Name == "John", people[0].Age == 30, people[0].IsActive == true
+// people[1].Name == "Jane", people[1].Age == 25, people[1].IsActive == false
+// people[2].Name == "Bob", people[2].Age == 45, people[2].IsActive == true
 ```
 
-### Column Projection
-Create a new table with only the specified columns:
+### Table Transformation Utilities
+
+#### Filtering Table Rows
+
 ```csharp
-var projectedTable = table.SelectColumns("FirstName", "LastName");
+// Given a table:
+// | Name  | Age | IsActive |
+// | John  | 30  | true     |
+// | Jane  | 25  | false    |
+// | Bob   | 45  | true     |
+
+var filteredTable = table.FilterRows(row => row["IsActive"] == "true");
+// filteredTable will have 2 rows: John and Bob
 ```
 
-### Nested Object Creation
-Convert tables with JSON data into nested dynamic objects:
-```csharp
-// With a table like:
-// | Entity   | Properties                              |
-// | User     | { "Name": "John", "Age": 30 }           |
-// | Address  | { "Street": "Main St", "Number": 123 }  |
+#### Projecting Table Columns
 
-var nestedObject = table.CreateNestedDynamicInstance();
-// Access: nestedObject.User.Name, nestedObject.Address.Street
+```csharp
+// Given a table:
+// | Name  | Age | Email             | Phone      |
+// | John  | 30  | john@example.com  | 1234567890 |
+// | Jane  | 25  | jane@example.com  | 0987654321 |
+
+var projectedTable = table.SelectColumns("Name", "Email");
+// projectedTable will have columns: Name, Email
+```
+
+#### Creating Nested Objects
+
+```csharp
+// Given a table:
+// | Entity   | Properties                                     |
+// | User     | {"Name": "John", "Age": 30, "IsActive": true}  |
+// | Address  | {"Street": "Main St", "City": "New York"}      |
+
+var entity = table.CreateNestedDynamicInstance();
+// entity.User.Name == "John"
+// entity.User.Age == 30
+// entity.User.IsActive == true
+// entity.Address.Street == "Main St"
+// entity.Address.City == "New York"
 ```
 
 ### Async Support
+
 Use asynchronous methods for better integration with asynchronous test frameworks:
+
 ```csharp
+// Async dynamic instance creation
 var dynamicObject = await table.CreateDynamicInstanceAsync();
+
+// Async dynamic set creation
+var dynamicSet = await table.CreateDynamicSetAsync();
+
+// Async comparison operations
 await table.CompareToDynamicInstanceAsync(instance);
+await table.CompareToDynamicSetAsync(set);
+
+// Async table transformations
+var filteredTable = await table.FilterRowsAsync(row => row["Status"] == "Active");
+var projectedTable = await table.SelectColumnsAsync("FirstName", "LastName");
+var nestedObject = await table.CreateNestedDynamicInstanceAsync();
 ```
+
+### Step Argument Transformations
+
+The library includes Reqnroll step argument transformations to simplify working with tables:
+
+```csharp
+// Transform a table to a dynamic instance in a step definition
+[Given(@"I have a user with following details")]
+public void GivenIHaveAUserWithFollowingDetails(dynamic user)
+{
+    // 'user' is automatically transformed from a table to a dynamic object
+    string name = user.Name;
+    int age = user.Age;
+}
+
+// Transform a table to a collection in a step definition
+[Given(@"I have the following users")]
+public void GivenIHaveTheFollowingUsers(IEnumerable<dynamic> users)
+{
+    // 'users' is automatically transformed from a table to a collection of dynamic objects
+    foreach (var user in users)
+    {
+        // Process each user
+    }
+}
+
+// Use nested objects in step definitions
+[Given(@"I have the following entities")]
+public void GivenIHaveTheFollowingEntities(dynamic entities)
+{
+    // Access nested properties
+    string userName = entities.User.Name;
+    string addressStreet = entities.Address.Street;
+}
+
+// Async transformations
+[Given(@"I have async data")]
+public async Task GivenIHaveAsyncData(Task<dynamic> dataTask)
+{
+    var data = await dataTask;
+    // Use the data
+}
+```
+
+### Type Conversion
+
+The library automatically handles type conversion for common types:
+- Strings
+- Integers
+- Doubles/Decimals
+- Booleans
+- DateTime values
 
 ---
 
