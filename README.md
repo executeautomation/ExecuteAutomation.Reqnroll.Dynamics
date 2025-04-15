@@ -115,6 +115,49 @@ A powerful library that enhances [Reqnroll](https://reqnroll.net/) (formerly Spe
   }
   ```
 
+### Using Transformations in Step Definitions
+
+Due to the dynamic nature of this library, automatic step argument transformations are not supported. Instead, you should explicitly call the transformation methods in your step definitions:
+
+```csharp
+// Explicitly transform the table to a dynamic object
+[Given(@"I have a user with following details")]
+public void GivenIHaveAUserWithFollowingDetails(Table table)
+{
+    dynamic user = table.CreateDynamicInstance();
+    string name = user.Name;
+    int age = user.Age;
+}
+
+// For collections of dynamic objects
+[Given(@"I have the following users")]
+public void GivenIHaveTheFollowingUsers(Table table)
+{
+    var users = table.CreateDynamicSet();
+    foreach (var user in users)
+    {
+        // Process each user
+    }
+}
+
+// For nested objects
+[Given(@"I have the following entities")]
+public void GivenIHaveTheFollowingEntities(Table table)
+{
+    dynamic entities = table.CreateNestedDynamicInstance();
+    string userName = entities.User.Name;
+    string addressStreet = entities.Address.Street;
+}
+
+// For async operations
+[Given(@"I have async data")]
+public async Task GivenIHaveAsyncData(Table table)
+{
+    dynamic data = await table.CreateDynamicInstanceAsync();
+    // Use the data
+}
+```
+
 ---
 
 ## Installation
@@ -294,49 +337,6 @@ await table.CompareToDynamicSetAsync(set);
 var filteredTable = await table.FilterRowsAsync(row => row["Status"] == "Active");
 var projectedTable = await table.SelectColumnsAsync("FirstName", "LastName");
 var nestedObject = await table.CreateNestedDynamicInstanceAsync();
-```
-
-### Step Argument Transformations
-
-The library includes Reqnroll step argument transformations to simplify working with tables:
-
-```csharp
-// Transform a table to a dynamic instance in a step definition
-[Given(@"I have a user with following details")]
-public void GivenIHaveAUserWithFollowingDetails(dynamic user)
-{
-    // 'user' is automatically transformed from a table to a dynamic object
-    string name = user.Name;
-    int age = user.Age;
-}
-
-// Transform a table to a collection in a step definition
-[Given(@"I have the following users")]
-public void GivenIHaveTheFollowingUsers(IEnumerable<dynamic> users)
-{
-    // 'users' is automatically transformed from a table to a collection of dynamic objects
-    foreach (var user in users)
-    {
-        // Process each user
-    }
-}
-
-// Use nested objects in step definitions
-[Given(@"I have the following entities")]
-public void GivenIHaveTheFollowingEntities(dynamic entities)
-{
-    // Access nested properties
-    string userName = entities.User.Name;
-    string addressStreet = entities.Address.Street;
-}
-
-// Async transformations
-[Given(@"I have async data")]
-public async Task GivenIHaveAsyncData(Task<dynamic> dataTask)
-{
-    var data = await dataTask;
-    // Use the data
-}
 ```
 
 ### Type Conversion

@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee66ccf4-293e-4c10-91b9-8a4d7bfcf5bd" name="Changes" comment="Includes tests" />
+    <list default="true" id="ee66ccf4-293e-4c10-91b9-8a4d7bfcf5bd" name="Changes" comment="Updated README.md">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ExecuteAutomation.Reqnroll.Dynamics/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ExecuteAutomation.Reqnroll.Dynamics/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TableTransformationUtilities.feature.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TableTransformationUtilities.feature.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TestDynamicTableInstance.feature.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TestDynamicTableInstance.feature.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TestDynamicTableSet.feature.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TestDynamicTableSet.feature.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TestRandomTableData.feature.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TestRandomTableData.feature.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics/DynamicStepArgumentTransformations.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics/DynamicStepArgumentTransformations.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,6 +30,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9ea7a4bfe62a4e7d815f1afc4ec3d17765200/10/aea24d22/StepArgumentTransformationAttribute.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d34a61b2c5db4e34b3645a11049979553fa00/d9/1217e4fd/Uri.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f6383fe753235c6c8e39d4db36427b5ad196ddf4e89ebd89bc40f1c3276061/TestOutputHelper.cs" root0="FORCE_HIGHLIGHTING" />
@@ -63,7 +72,7 @@
       <updated>1744677964641</updated>
       <workItem from="1744677965742" duration="4936000" />
       <workItem from="1744710402975" duration="1011000" />
-      <workItem from="1744711441886" duration="1852000" />
+      <workItem from="1744711441886" duration="3269000" />
     </task>
     <task id="LOCAL-00001" summary="Enhanced README with detailed features and usage instructions; added AutoFixture integration for dynamic data generation; updated project dependencies; created new test scenarios for dynamic table instances and random data generation.">
       <option name="closed" value="true" />
@@ -89,7 +98,23 @@
       <option name="project" value="LOCAL" />
       <updated>1744744129674</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Revert &quot;Create README.md&quot;&#10;&#10;This reverts commit e1e575d5">
+      <option name="closed" value="true" />
+      <created>1744744385127</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1744744385127</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Updated README.md">
+      <option name="closed" value="true" />
+      <created>1744744727718</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1744744727718</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -113,7 +138,9 @@
     <MESSAGE value="Enhanced README with detailed features and usage instructions; added AutoFixture integration for dynamic data generation; updated project dependencies; created new test scenarios for dynamic table instances and random data generation." />
     <MESSAGE value="Table Transformation Utilities and Async Support" />
     <MESSAGE value="Includes tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="Includes tests" />
+    <MESSAGE value="Revert &quot;Create README.md&quot;&#10;&#10;This reverts commit e1e575d5" />
+    <MESSAGE value="Updated README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated README.md" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -156,6 +183,19 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/StepDefinitions/StepArgumentTransformationSteps.cs</url>
+          <line>117</line>
+          <properties documentPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/StepDefinitions/StepArgumentTransformationSteps.cs" containingFunctionPresentation="Method 'GivenIHaveAsyncData'">
+            <startOffsets>
+              <option value="3985" />
+            </startOffsets>
+            <endOffsets>
+              <option value="4039" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
