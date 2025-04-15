@@ -1,12 +1,9 @@
-Feature: DynamicTestDynamicSetInstance
+Feature: DynamicRandomTestData
 
-Test Dynamic Table implementation
+Test Random Data from Table
 
     @mytag
-    Scenario: Test Dynamic Table Instance implementation
-        Given the numbers are in dynamic instance table like
-          | Number | Value | Output |
-          | First  | 50    | 50     |
-        And the second number is 70
-        When the two numbers are added
-        Then the result should be 120
+    Scenario: Test Random Table Instance implementation
+        Given users with the following details:
+          | Username    | Email      | DateOfBirth | PhoneNumber |Guid|Zipcode|
+          | auto.string | auto.email | auto.date   | auto.phone  |auto.guid|auto.zipcode|

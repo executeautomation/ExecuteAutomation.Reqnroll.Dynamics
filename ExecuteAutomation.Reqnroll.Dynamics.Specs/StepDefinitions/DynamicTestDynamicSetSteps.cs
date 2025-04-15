@@ -53,4 +53,21 @@ public sealed class DynamicTestDynamicSetSteps
         _testOutputHelper.WriteLine(data.Value.ToString());
         _testOutputHelper.WriteLine(data.Output.ToString());
     }
+
+    [Given(@"users with the following details:")]
+    public void GivenUsersWithTheFollowingDetails(Table table)
+    {
+        var users = table.CreateDynamicSetWithAutoFixture();
+        
+        foreach (var user in users)
+        {
+            _testOutputHelper.WriteLine($"Username: {user.Username}");
+            _testOutputHelper.WriteLine($"Email: {user.Email}");
+            _testOutputHelper.WriteLine($"DateOfBirth: {user.DateOfBirth}");
+            _testOutputHelper.WriteLine($"PhoneNumber: {user.PhoneNumber}");
+            _testOutputHelper.WriteLine($"Guid: {user.Guid}");
+            _testOutputHelper.WriteLine($"Zipcode: {user.Zipcode}");
+            _testOutputHelper.WriteLine("---");
+        }
+    }
 }
