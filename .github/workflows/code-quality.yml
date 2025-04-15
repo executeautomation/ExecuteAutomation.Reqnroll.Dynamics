@@ -1,0 +1,44 @@
+name: Code Quality
+
+on:
+  push:
+    branches: [ main, master, develop ]
+    paths:
+      - '**.cs'
+      - '**/*.csproj'
+      - '.github/workflows/code-quality.yml'
+  pull_request:
+    branches: [ main, master, develop ]
+    paths:
+      - '**.cs'
+      - '**/*.csproj'
+      - '.github/workflows/code-quality.yml'
+  workflow_dispatch:
+
+jobs:
+  analyze:
+    name: Code Quality Analysis
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+        
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'
+        
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+      
+    - name: Install .NET Format
+      run: dotnet tool install -g dotnet-format
+      
+    - name: Check code formatting
+      run: |
+        dotnet format --verify-no-changes --verbosity diagnostic || echo "Code format issues found. Please run 'dotnet format' locally."
+      continue-on-error: true 
