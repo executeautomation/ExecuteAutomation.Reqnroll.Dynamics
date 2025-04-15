@@ -6,13 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="ee66ccf4-293e-4c10-91b9-8a4d7bfcf5bd" name="Changes" comment="Updated README.md">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ExecuteAutomation.Reqnroll.Dynamics/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ExecuteAutomation.Reqnroll.Dynamics/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/AsyncSupport.feature" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/AsyncSupport.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/AsyncSupport.feature.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/AsyncSupport.feature.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TableTransformationUtilities.feature.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TableTransformationUtilities.feature.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TestDynamicTableInstance.feature.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TestDynamicTableInstance.feature.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TestDynamicTableSet.feature.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TestDynamicTableSet.feature.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TestRandomTableData.feature" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TestRandomTableData.feature" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TestRandomTableData.feature.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TestRandomTableData.feature.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/StepDefinitions/AsyncSupportSteps.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/StepDefinitions/AsyncSupportSteps.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/StepDefinitions/DynamicTestDynamicSetSteps.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/StepDefinitions/DynamicTestDynamicSetSteps.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics/DynamicInstanceComparisonException.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics/DynamicInstanceComparisonException.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +31,9 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9ea7a4bfe62a4e7d815f1afc4ec3d17765200/10/aea24d22/StepArgumentTransformationAttribute.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a840692e98b74557bc005b38213a22c72dad0/14/7444a73d/Assert.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d34a61b2c5db4e34b3645a11049979553fa00/d9/1217e4fd/Uri.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9435178c16cbd6e794334579142d3cbf1e650d771fefe869cc6571b65e7efc/TypeAsserts.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f6383fe753235c6c8e39d4db36427b5ad196ddf4e89ebd89bc40f1c3276061/TestOutputHelper.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="KubernetesApiPersistence">{}</component>
@@ -53,6 +53,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "XThreadsFramesViewSplitterKey": "0.3894081",
     "b9112955-bd15-4400-92a6-37817f678f16.executor": "Debug",
     "git-widget-placeholder": "Table-Transformation-Utilities-And-Async-Support",
     "node.js.detected.package.eslint": "true",
@@ -171,6 +172,71 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/StepDefinitions/DynamicTestDynamicSetSteps.cs</url>
+          <line>63</line>
+          <properties documentPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/StepDefinitions/DynamicTestDynamicSetSteps.cs" containingFunctionPresentation="Method 'GivenUsersWithTheFollowingDetails'">
+            <startOffsets>
+              <option value="2009" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2067" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/StepDefinitions/TestRandomTableDataSteps.cs</url>
+          <line>307</line>
+          <properties documentPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/StepDefinitions/TestRandomTableDataSteps.cs" containingFunctionPresentation="Method 'ThenAllUsersShouldHaveValidGUIDs'">
+            <startOffsets>
+              <option value="13401" />
+            </startOffsets>
+            <endOffsets>
+              <option value="13431" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/StepDefinitions/TestRandomTableDataSteps.cs</url>
+          <line>299</line>
+          <properties documentPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/StepDefinitions/TestRandomTableDataSteps.cs" containingFunctionPresentation="Method 'ThenAllUsersShouldHaveValidPhoneNumbers'">
+            <startOffsets>
+              <option value="13157" />
+            </startOffsets>
+            <endOffsets>
+              <option value="13188" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics/DynamicInstanceComparisonException.cs</url>
+          <line>408</line>
+          <properties documentPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics/DynamicInstanceComparisonException.cs" containingFunctionPresentation="Property 'First'">
+            <startOffsets>
+              <option value="14636" />
+            </startOffsets>
+            <endOffsets>
+              <option value="14692" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/StepDefinitions/TestRandomTableDataSteps.cs</url>
+          <line>105</line>
+          <properties documentPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/StepDefinitions/TestRandomTableDataSteps.cs" containingFunctionPresentation="Method 'ThenThePhoneNumberShouldHaveAValidFormat'">
+            <startOffsets>
+              <option value="4501" />
+            </startOffsets>
+            <endOffsets>
+              <option value="4549" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="27" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
