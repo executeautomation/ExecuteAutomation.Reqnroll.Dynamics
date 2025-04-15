@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ee66ccf4-293e-4c10-91b9-8a4d7bfcf5bd" name="Changes" comment="Updated README.md">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ExecuteAutomation.Reqnroll.Dynamics/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ExecuteAutomation.Reqnroll.Dynamics/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/AsyncSupport.feature" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/AsyncSupport.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/AsyncSupport.feature.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/AsyncSupport.feature.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TableTransformationUtilities.feature.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TableTransformationUtilities.feature.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TestDynamicTableInstance.feature.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TestDynamicTableInstance.feature.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TestDynamicTableSet.feature.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TestDynamicTableSet.feature.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TestRandomTableData.feature.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TestRandomTableData.feature.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/StepDefinitions/AsyncSupportSteps.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/StepDefinitions/AsyncSupportSteps.cs" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DpaMonitoringSettings">
+    <option name="firstShow" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9ea7a4bfe62a4e7d815f1afc4ec3d17765200/10/aea24d22/StepArgumentTransformationAttribute.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d34a61b2c5db4e34b3645a11049979553fa00/d9/1217e4fd/Uri.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f6383fe753235c6c8e39d4db36427b5ad196ddf4e89ebd89bc40f1c3276061/TestOutputHelper.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2vk8yM4oVLzqKP4qRS6LRQZQtlb" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "b9112955-bd15-4400-92a6-37817f678f16.executor": "Debug",
+    "git-widget-placeholder": "Table-Transformation-Utilities-And-Async-Support",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ee66ccf4-293e-4c10-91b9-8a4d7bfcf5bd" name="Changes" comment="" />
+      <created>1744677964641</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1744677964641</updated>
+      <workItem from="1744677965742" duration="4936000" />
+      <workItem from="1744710402975" duration="1011000" />
+      <workItem from="1744711441886" duration="4085000" />
+    </task>
+    <task id="LOCAL-00001" summary="Enhanced README with detailed features and usage instructions; added AutoFixture integration for dynamic data generation; updated project dependencies; created new test scenarios for dynamic table instances and random data generation.">
+      <option name="closed" value="true" />
+      <created>1744693770496</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1744693770496</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Table Transformation Utilities and Async Support">
+      <option name="closed" value="true" />
+      <created>1744744105940</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1744744105940</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Includes tests">
+      <option name="closed" value="true" />
+      <created>1744744129674</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1744744129674</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Revert &quot;Create README.md&quot;&#10;&#10;This reverts commit e1e575d5">
+      <option name="closed" value="true" />
+      <created>1744744385127</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1744744385127</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Updated README.md">
+      <option name="closed" value="true" />
+      <created>1744744727718</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1744744727718</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="Enhanced README with detailed features and usage instructions; added AutoFixture integration for dynamic data generation; updated project dependencies; created new test scenarios for dynamic table instances and random data generation." />
+    <MESSAGE value="Table Transformation Utilities and Async Support" />
+    <MESSAGE value="Includes tests" />
+    <MESSAGE value="Revert &quot;Create README.md&quot;&#10;&#10;This reverts commit e1e575d5" />
+    <MESSAGE value="Updated README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated README.md" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/StepDefinitions/TableTransformationSteps.cs</url>
+          <line>61</line>
+          <properties documentPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/StepDefinitions/TableTransformationSteps.cs" containingFunctionPresentation="Method 'WhenISelectOnlyTheFirstNameAndEmailColumns'">
+            <startOffsets>
+              <option value="1895" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1964" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/StepDefinitions/AsyncSupportSteps.cs</url>
+          <line>40</line>
+          <properties documentPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/StepDefinitions/AsyncSupportSteps.cs" containingFunctionPresentation="Method 'ThenTheAsyncDynamicInstanceShouldHavePropertyWithValue'">
+            <startOffsets>
+              <option value="1408" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1499" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

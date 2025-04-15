@@ -2,6 +2,8 @@
 
 A powerful library that enhances [Reqnroll](https://reqnroll.net/) (formerly SpecFlow) with dynamic data handling capabilities, simplifying how data is created and manipulated in Gherkin feature files.
 
+---
+
 ## Features
 
 ### Core Dynamic Table Capabilities
@@ -27,6 +29,37 @@ A powerful library that enhances [Reqnroll](https://reqnroll.net/) (formerly Spe
   // In step definitions, tables are automatically transformed
   public void GivenTheFollowingUsers(IEnumerable<object> users) { ... }
   public void GivenAUser(dynamic user) { ... }
+  ```
+
+### Enhanced Table Manipulation
+
+- **Horizontal/Vertical Table Transformation**: Transform between table formats
+  ```csharp
+  var horizontalTable = CreateHorizontalTable(verticalTable);
+  ```
+
+- **Table Filtering**: Filter rows based on specific criteria
+  ```csharp
+  var filteredTable = table.FilterRows(row => row["Status"] == "Active");
+  ```
+
+- **Column Projection**: Create a new table with only specified columns
+  ```csharp
+  var projectedTable = table.SelectColumns("FirstName", "LastName");
+  ```
+
+- **Nested Object Creation**: Create hierarchical objects from tables with JSON data
+  ```csharp
+  var nestedObject = table.CreateNestedDynamicInstance();
+  ```
+
+### Async Support
+
+- **Asynchronous Operations**: Use async versions of all core methods
+  ```csharp
+  var dynamicObject = await table.CreateDynamicInstanceAsync();
+  var dynamicSet = await table.CreateDynamicSetAsync();
+  await table.CompareToDynamicInstanceAsync(instance);
   ```
 
 ### AutoFixture Integration
@@ -82,13 +115,74 @@ A powerful library that enhances [Reqnroll](https://reqnroll.net/) (formerly Spe
   }
   ```
 
-## Getting Started
+### Using Transformations in Step Definitions
 
-### Installation
+Due to the dynamic nature of this library, automatic step argument transformations are not supported. Instead, you should explicitly call the transformation methods in your step definitions:
 
+```csharp
+// Explicitly transform the table to a dynamic object
+[Given(@"I have a user with following details")]
+public void GivenIHaveAUserWithFollowingDetails(Table table)
+{
+    dynamic user = table.CreateDynamicInstance();
+    string name = user.Name;
+    int age = user.Age;
+}
+
+// For collections of dynamic objects
+[Given(@"I have the following users")]
+public void GivenIHaveTheFollowingUsers(Table table)
+{
+    var users = table.CreateDynamicSet();
+    foreach (var user in users)
+    {
+        // Process each user
+    }
+}
+
+// For nested objects
+[Given(@"I have the following entities")]
+public void GivenIHaveTheFollowingEntities(Table table)
+{
+    dynamic entities = table.CreateNestedDynamicInstance();
+    string userName = entities.User.Name;
+    string addressStreet = entities.Address.Street;
+}
+
+// For async operations
+[Given(@"I have async data")]
+public async Task GivenIHaveAsyncData(Table table)
+{
+    dynamic data = await table.CreateDynamicInstanceAsync();
+    // Use the data
+}
+```
+
+---
+
+## Installation
+
+To install **ExecuteAutomation.Reqnroll.Dynamics**, add the NuGet package to your project using one of the following methods:
+
+### Package Manager
+```bash
+Install-Package ExecuteAutomation.Reqnroll.Dynamics
+```
+
+### .NET CLI
 ```bash
 dotnet add package ExecuteAutomation.Reqnroll.Dynamics
 ```
+
+### PackageReference
+Add the following line to your `.csproj` file:
+```xml
+<PackageReference Include="ExecuteAutomation.Reqnroll.Dynamics" Version="1.0.0" />
+```
+
+---
+
+## Getting Started
 
 ### Basic Usage
 
@@ -132,28 +226,142 @@ public static void SetupAutoFixture()
 }
 ```
 
-## Advanced Scenarios
+---
 
-### Vertical Tables
+## Advanced Features
 
-The library supports vertical tables (2 columns with key-value pairs):
+### Dynamic Object Creation
 
-```gherkin
-Given a user with details:
-  | Property   | Value       |
-  | Username   | johndoe     |
-  | Email      | auto.email  |
-  | DateOfBirth| 1990-01-01  |
+#### Creating from a Horizontal Table
+
+```csharp
+// Given a table:
+// | Name  | Age | IsActive |
+// | John  | 30  | true     |
+
+var person = table.CreateDynamicInstance();
+// person.Name == "John"
+// person.Age == 30 (int)
+// person.IsActive == true (bool)
+```
+
+#### Creating from a Vertical Table
+
+```csharp
+// Given a table:
+// | Field    | Value  |
+// | Name     | John   |
+// | Age      | 30     |
+// | IsActive | true   |
+
+var person = table.CreateDynamicInstance();
+// person.Name == "John"
+// person.Age == 30 (int)
+// person.IsActive == true (bool)
+```
+
+### Creating a Set of Dynamic Objects
+
+```csharp
+// Given a table:
+// | Name  | Age | IsActive |
+// | John  | 30  | true     |
+// | Jane  | 25  | false    |
+// | Bob   | 45  | true     |
+
+var people = table.CreateDynamicSet();
+// people[0].Name == "John", people[0].Age == 30, people[0].IsActive == true
+// people[1].Name == "Jane", people[1].Age == 25, people[1].IsActive == false
+// people[2].Name == "Bob", people[2].Age == 45, people[2].IsActive == true
+```
+
+### Table Transformation Utilities
+
+#### Filtering Table Rows
+
+```csharp
+// Given a table:
+// | Name  | Age | IsActive |
+// | John  | 30  | true     |
+// | Jane  | 25  | false    |
+// | Bob   | 45  | true     |
+
+var filteredTable = table.FilterRows(row => row["IsActive"] == "true");
+// filteredTable will have 2 rows: John and Bob
+```
+
+#### Projecting Table Columns
+
+```csharp
+// Given a table:
+// | Name  | Age | Email             | Phone      |
+// | John  | 30  | john@example.com  | 1234567890 |
+// | Jane  | 25  | jane@example.com  | 0987654321 |
+
+var projectedTable = table.SelectColumns("Name", "Email");
+// projectedTable will have columns: Name, Email
+```
+
+#### Creating Nested Objects
+
+```csharp
+// Given a table:
+// | Entity   | Properties                                     |
+// | User     | {"Name": "John", "Age": 30, "IsActive": true}  |
+// | Address  | {"Street": "Main St", "City": "New York"}      |
+
+var entity = table.CreateNestedDynamicInstance();
+// entity.User.Name == "John"
+// entity.User.Age == 30
+// entity.User.IsActive == true
+// entity.Address.Street == "Main St"
+// entity.Address.City == "New York"
+```
+
+### Async Support
+
+Use asynchronous methods for better integration with asynchronous test frameworks:
+
+```csharp
+// Async dynamic instance creation
+var dynamicObject = await table.CreateDynamicInstanceAsync();
+
+// Async dynamic set creation
+var dynamicSet = await table.CreateDynamicSetAsync();
+
+// Async comparison operations
+await table.CompareToDynamicInstanceAsync(instance);
+await table.CompareToDynamicSetAsync(set);
+
+// Async table transformations
+var filteredTable = await table.FilterRowsAsync(row => row["Status"] == "Active");
+var projectedTable = await table.SelectColumnsAsync("FirstName", "LastName");
+var nestedObject = await table.CreateNestedDynamicInstanceAsync();
 ```
 
 ### Type Conversion
 
-Automatic type conversion is performed for common data types:
+The library automatically handles type conversion for common types:
+- Strings
 - Integers
-- Decimals/Doubles
+- Doubles/Decimals
 - Booleans
-- DateTimes
+- DateTime values
+
+---
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Fork this repository, create a branch, and submit a pull request with your changes.
+
+---
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+## Acknowledgments
+
+This project is a fork of the popular [Specflow.Assist.Dynamics](https://github.com/marcusoftnet/SpecFlow.Assist.Dynamic) package, with enhancements tailored for the **Reqnroll** community.
