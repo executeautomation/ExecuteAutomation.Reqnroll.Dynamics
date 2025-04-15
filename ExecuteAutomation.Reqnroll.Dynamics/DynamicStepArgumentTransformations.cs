@@ -22,4 +22,22 @@ public class DynamicStepArgumentTransformations
     {
         return table.CreateDynamicInstance();
     }
+    
+    [StepArgumentTransformation]
+    public dynamic TransformToNestedDynamicInstance(Table table)
+    {
+        return table.CreateNestedDynamicInstance();
+    }
+    
+    [StepArgumentTransformation]
+    public async Task<dynamic> TransformToDynamicInstanceAsync(Table table)
+    {
+        return await table.CreateDynamicInstanceAsync();
+    }
+    
+    [StepArgumentTransformation]
+    public async Task<IEnumerable<dynamic>> TransformToEnumerableAsync(Table table)
+    {
+        return await table.CreateDynamicSetAsync();
+    }
 }

@@ -303,4 +303,187 @@ public static class DynamicTableHelpers
         const string replacement = "";
         return Regex.Replace(orgPropertyName, pattern, replacement);
     }
+
+    #region Table Transformation Utilities
+
+    /// <summary>
+    /// Creates a new table with rows that match the specified predicate
+    /// </summary>
+    /// <param name="table">The table to filter</param>
+    /// <param name="predicate">The function to test each row for a condition</param>
+    /// <returns>A new filtered table</returns>
+    public static Table FilterRows(this Table table, Func<DataTableRow, bool> predicate)
+    {
+        var filteredTable = new Table(table.Header.ToArray());
+        
+        foreach (var row in table.Rows.Where(predicate))
+        {
+            var rowValues = new List<string>();
+            foreach (var header in table.Header)
+            {
+                rowValues.Add(row[header]);
+            }
+            filteredTable.AddRow(rowValues.ToArray());
+        }
+        
+        return filteredTable;
+    }
+
+    /// <summary>
+    /// Creates a new table with only the specified columns
+    /// </summary>
+    /// <param name="table">The table to project</param>
+    /// <param name="columnNames">The column names to include in the new table</param>
+    /// <returns>A new projected table</returns>
+    public static Table SelectColumns(this Table table, params string[] columnNames)
+    {
+        // Verify all column names exist
+        foreach (var column in columnNames)
+        {
+            if (!table.Header.Contains(column))
+                throw new ArgumentException($"Column '{column}' not found in the table");
+        }
+        
+        var projectedTable = new Table(columnNames);
+        
+        foreach (var row in table.Rows)
+        {
+            var rowValues = new List<string>();
+            foreach (var column in columnNames)
+            {
+                rowValues.Add(row[column]);
+            }
+            projectedTable.AddRow(rowValues.ToArray());
+        }
+        
+        return projectedTable;
+    }
+
+    /// <summary>
+    /// Parses nested JSON objects from table cells to create hierarchical dynamic objects
+    /// </summary>
+    /// <param name="table">The table containing JSON objects</param>
+    /// <param name="doTypeConversion">Whether to apply type conversion</param>
+    /// <returns>A dynamic object with nested properties</returns>
+    public static ExpandoObject CreateNestedDynamicInstance(this Table table, bool doTypeConversion = true)
+    {
+        dynamic expando = new ExpandoObject();
+        var dicExpando = expando as IDictionary<string, object>;
+        
+        foreach (var row in table.Rows)
+        {
+            var entityName = row[0];
+            var propertiesJson = row[1];
+            
+            // Parse the JSON properties string to dictionary
+            try
+            {
+                var nestedProperties = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, object>>(propertiesJson);
+                
+                // Convert the dictionary to ExpandoObject
+                dynamic nestedExpando = new ExpandoObject();
+                var dicNestedExpando = nestedExpando as IDictionary<string, object>;
+                
+                foreach (var prop in nestedProperties)
+                {
+                    var value = prop.Value?.ToString();
+                    dicNestedExpando.Add(CreatePropertyName(prop.Key), value != null && doTypeConversion ? CreateTypedValue(value, true) : prop.Value);
+                }
+                
+                dicExpando.Add(CreatePropertyName(entityName), nestedExpando);
+            }
+            catch (System.Text.Json.JsonException)
+            {
+                // If the cell is not a valid JSON, just add it as a regular string
+                dicExpando.Add(CreatePropertyName(entityName), doTypeConversion ? CreateTypedValue(propertiesJson, true) : propertiesJson);
+            }
+        }
+        
+        return expando;
+    }
+
+    #endregion
+
+    #region Async Support
+
+    /// <summary>
+    /// Asynchronously creates a dynamic object from the headers and values of the table
+    /// </summary>
+    /// <param name="table">The table to create a dynamic object from</param>
+    /// <param name="doTypeConversion">Whether to perform type conversion</param>
+    /// <returns>Task returning the created object</returns>
+    public static async Task<ExpandoObject> CreateDynamicInstanceAsync(this Table table, bool doTypeConversion = true)
+    {
+        return await Task.Run(() => CreateDynamicInstance(table, doTypeConversion));
+    }
+
+    /// <summary>
+    /// Asynchronously creates a set of dynamic objects based on the table headers and values
+    /// </summary>
+    /// <param name="table">The table to create a set of dynamics from</param>
+    /// <param name="doTypeConversion">Whether to perform type conversion</param>
+    /// <returns>Task returning a set of dynamics</returns>
+    public static async Task<IEnumerable<dynamic>> CreateDynamicSetAsync(this Table table, bool doTypeConversion = true)
+    {
+        return await Task.Run(() => CreateDynamicSet(table, doTypeConversion));
+    }
+
+    /// <summary>
+    /// Asynchronously validates if a dynamic instance matches the table
+    /// </summary>
+    /// <param name="table">The table to compare the instance against</param>
+    /// <param name="instance">The instance to compare the table against</param>
+    /// <param name="doTypeConversion">Whether to perform type conversion</param>
+    /// <returns>Task representing the asynchronous operation</returns>
+    public static async Task CompareToDynamicInstanceAsync(this Table table, dynamic instance, bool doTypeConversion = true)
+    {
+        await Task.Run(() => CompareToDynamicInstance(table, instance, doTypeConversion));
+    }
+
+    /// <summary>
+    /// Asynchronously validates that the dynamic set matches the table
+    /// </summary>
+    /// <param name="table">The table to compare the set against</param>
+    /// <param name="set">The set to compare the table against</param>
+    /// <param name="doTypeConversion">Whether to perform type conversion</param>
+    /// <returns>Task representing the asynchronous operation</returns>
+    public static async Task CompareToDynamicSetAsync(this Table table, IList<dynamic> set, bool doTypeConversion = true)
+    {
+        await Task.Run(() => CompareToDynamicSet(table, set, doTypeConversion));
+    }
+
+    /// <summary>
+    /// Asynchronously creates a filtered table based on a predicate
+    /// </summary>
+    /// <param name="table">The table to filter</param>
+    /// <param name="predicate">The function to test each row for a condition</param>
+    /// <returns>Task returning the filtered table</returns>
+    public static async Task<Table> FilterRowsAsync(this Table table, Func<DataTableRow, bool> predicate)
+    {
+        return await Task.Run(() => FilterRows(table, predicate));
+    }
+
+    /// <summary>
+    /// Asynchronously creates a projected table with only specified columns
+    /// </summary>
+    /// <param name="table">The table to project</param>
+    /// <param name="columnNames">The column names to include</param>
+    /// <returns>Task returning the projected table</returns>
+    public static async Task<Table> SelectColumnsAsync(this Table table, params string[] columnNames)
+    {
+        return await Task.Run(() => SelectColumns(table, columnNames));
+    }
+
+    /// <summary>
+    /// Asynchronously creates a nested dynamic object from the table
+    /// </summary>
+    /// <param name="table">The table containing nested data</param>
+    /// <param name="doTypeConversion">Whether to perform type conversion</param>
+    /// <returns>Task returning the nested dynamic object</returns>
+    public static async Task<ExpandoObject> CreateNestedDynamicInstanceAsync(this Table table, bool doTypeConversion = true)
+    {
+        return await Task.Run(() => CreateNestedDynamicInstance(table, doTypeConversion));
+    }
+
+    #endregion
 }
