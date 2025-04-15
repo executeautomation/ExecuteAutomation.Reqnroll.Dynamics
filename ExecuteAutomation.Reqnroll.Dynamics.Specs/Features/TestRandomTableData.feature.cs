@@ -112,14 +112,14 @@ namespace ExecuteAutomation.Reqnroll.Dynamics.Specs.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table9 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table11 = new global::Reqnroll.Table(new string[] {
                             "Username",
                             "Email",
                             "DateOfBirth",
                             "PhoneNumber",
                             "Guid",
                             "Zipcode"});
-                table9.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             "auto.string",
                             "auto.email",
                             "auto.date",
@@ -127,7 +127,7 @@ namespace ExecuteAutomation.Reqnroll.Dynamics.Specs.Features
                             "auto.guid",
                             "auto.zipcode"});
 #line 7
-        await testRunner.GivenAsync("users with the following details:", ((string)(null)), table9, "Given ");
+        await testRunner.GivenAsync("users with the following details:", ((string)(null)), table11, "Given ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();

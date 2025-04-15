@@ -11,6 +11,8 @@ public sealed class AsyncSupportSteps
     private dynamic _asyncDynamicInstance;
     private IEnumerable<dynamic> _asyncDynamicSet;
     private Table _asyncFilteredTable;
+    private Table _asyncProjectedTable;
+    private dynamic _asyncNestedObject;
 
     public AsyncSupportSteps(ITestOutputHelper testOutputHelper)
     {
@@ -107,6 +109,74 @@ public sealed class AsyncSupportSteps
             Assert.Equal(expectedStatus, row["Status"]);
         }
         _testOutputHelper.WriteLine($"All rows have Status {expectedStatus}");
+    }
+
+    #endregion
+
+    #region Async Projection Tests
+
+    [Given(@"I have a table with multiple columns for async projection")]
+    public void GivenIHaveATableWithMultipleColumnsForAsyncProjection(Table table)
+    {
+        _originalTable = table;
+        _testOutputHelper.WriteLine($"Original table has {table.Header.Count} columns for async projection");
+    }
+
+    [When(@"I select only the FirstName and Email columns asynchronously")]
+    public async Task WhenISelectOnlyTheFirstNameAndEmailColumnsAsynchronously()
+    {
+        _asyncProjectedTable = await _originalTable.SelectColumnsAsync("FirstName", "Email");
+        _testOutputHelper.WriteLine($"Projected table asynchronously and got {_asyncProjectedTable.Header.Count} columns");
+    }
+
+    [Then(@"the async projected table should have (.*) columns")]
+    public void ThenTheAsyncProjectedTableShouldHaveColumns(int expectedColumnCount)
+    {
+        Assert.Equal(expectedColumnCount, _asyncProjectedTable.Header.Count);
+        _testOutputHelper.WriteLine($"Async projected table has {_asyncProjectedTable.Header.Count} columns");
+    }
+
+    [Then(@"the projected columns should be FirstName and Email")]
+    public void ThenTheProjectedColumnsShouldBeFirstNameAndEmail()
+    {
+        Assert.Contains("FirstName", _asyncProjectedTable.Header);
+        Assert.Contains("Email", _asyncProjectedTable.Header);
+        Assert.DoesNotContain("LastName", _asyncProjectedTable.Header);
+        Assert.DoesNotContain("Age", _asyncProjectedTable.Header);
+        Assert.DoesNotContain("Phone", _asyncProjectedTable.Header);
+        _testOutputHelper.WriteLine("Projected columns are FirstName and Email");
+    }
+
+    #endregion
+
+    #region Async Nested Object Tests
+
+    [Given(@"I have a table with nested JSON data for async processing")]
+    public void GivenIHaveATableWithNestedJSONDataForAsyncProcessing(Table table)
+    {
+        _originalTable = table;
+        _testOutputHelper.WriteLine($"Original table has {table.RowCount} rows with nested JSON data for async processing");
+    }
+
+    [When(@"I create a nested dynamic object asynchronously")]
+    public async Task WhenICreateANestedDynamicObjectAsynchronously()
+    {
+        _asyncNestedObject = await _originalTable.CreateNestedDynamicInstanceAsync();
+        _testOutputHelper.WriteLine("Created nested dynamic object asynchronously");
+    }
+
+    [Then(@"the async User name should be (.*)")]
+    public void ThenTheAsyncUserNameShouldBe(string expectedName)
+    {
+        Assert.Equal(expectedName, _asyncNestedObject.User.Name);
+        _testOutputHelper.WriteLine($"Async User name is {_asyncNestedObject.User.Name}");
+    }
+
+    [Then(@"the async Address city should be (.*)")]
+    public void ThenTheAsyncAddressCityShouldBe(string expectedCity)
+    {
+        Assert.Equal(expectedCity, _asyncNestedObject.Address.City);
+        _testOutputHelper.WriteLine($"Async Address city is {_asyncNestedObject.Address.City}");
     }
 
     #endregion

@@ -112,24 +112,24 @@ namespace ExecuteAutomation.Reqnroll.Dynamics.Specs.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table8 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table10 = new global::Reqnroll.Table(new string[] {
                             "Number",
                             "Value",
                             "Output"});
-                table8.AddRow(new string[] {
+                table10.AddRow(new string[] {
                             "First",
                             "50",
                             "50"});
-                table8.AddRow(new string[] {
+                table10.AddRow(new string[] {
                             "Second",
                             "70",
                             "70"});
-                table8.AddRow(new string[] {
+                table10.AddRow(new string[] {
                             "Third",
                             "100",
                             "100"});
 #line 7
-        await testRunner.GivenAsync("the numbers are", ((string)(null)), table8, "Given ");
+        await testRunner.GivenAsync("the numbers are", ((string)(null)), table10, "Given ");
 #line hidden
 #line 12
         await testRunner.AndAsync("the second number is 70", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");

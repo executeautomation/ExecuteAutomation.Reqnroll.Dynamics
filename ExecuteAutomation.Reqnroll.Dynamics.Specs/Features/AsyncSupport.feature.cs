@@ -111,13 +111,13 @@ namespace ExecuteAutomation.Reqnroll.Dynamics.Specs.Features
             {
                 await this.ScenarioStartAsync();
                 global::Reqnroll.Table table1 = new global::Reqnroll.Table(new string[] {
-                            "Number",
-                            "Value",
-                            "Output"});
+                            "Name",
+                            "Age",
+                            "Email"});
                 table1.AddRow(new string[] {
-                            "First",
-                            "50",
-                            "50"});
+                            "John",
+                            "30",
+                            "john@example.com"});
 #line 6
         await testRunner.GivenAsync("I have a table for async processing", ((string)(null)), table1, "Given ");
 #line hidden
@@ -125,7 +125,11 @@ namespace ExecuteAutomation.Reqnroll.Dynamics.Specs.Features
         await testRunner.WhenAsync("I create a dynamic instance asynchronously", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 10
-        await testRunner.ThenAsync("the async dynamic instance should have property Number with value First", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+        await testRunner.ThenAsync("the async dynamic instance should have property Name with value John", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+#line 11
+        await testRunner.AndAsync("the async dynamic instance should have property Email with value john@example.com" +
+                        "", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -139,7 +143,7 @@ namespace ExecuteAutomation.Reqnroll.Dynamics.Specs.Features
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Create dynamic set asynchronously", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 12
+#line 13
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -165,16 +169,16 @@ namespace ExecuteAutomation.Reqnroll.Dynamics.Specs.Features
                             "Bob",
                             "40",
                             "Active"});
-#line 13
+#line 14
         await testRunner.GivenAsync("I have a table with multiple rows for async processing", ((string)(null)), table2, "Given ");
 #line hidden
-#line 18
+#line 19
         await testRunner.WhenAsync("I create a dynamic set asynchronously", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 19
+#line 20
         await testRunner.ThenAsync("the async dynamic set should have 3 items", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
-#line 20
+#line 21
         await testRunner.AndAsync("the first item in the set should have Name John", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
             }
@@ -189,7 +193,7 @@ namespace ExecuteAutomation.Reqnroll.Dynamics.Specs.Features
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Filter table rows asynchronously", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 22
+#line 23
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -219,17 +223,112 @@ namespace ExecuteAutomation.Reqnroll.Dynamics.Specs.Features
                             "Claire",
                             "35",
                             "Active"});
-#line 23
+#line 24
         await testRunner.GivenAsync("I have a table with various statuses", ((string)(null)), table3, "Given ");
 #line hidden
-#line 29
+#line 30
         await testRunner.WhenAsync("I filter the rows asynchronously where Status is Active", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 30
+#line 31
         await testRunner.ThenAsync("the async filtered table should have 3 rows", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
-#line 31
+#line 32
         await testRunner.AndAsync("all rows in the filtered table should have Status Active", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Project table columns asynchronously")]
+        [Xunit.TraitAttribute("FeatureTitle", "AsyncSupport")]
+        [Xunit.TraitAttribute("Description", "Project table columns asynchronously")]
+        public async System.Threading.Tasks.Task ProjectTableColumnsAsynchronously()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Project table columns asynchronously", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 34
+    this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+                global::Reqnroll.Table table4 = new global::Reqnroll.Table(new string[] {
+                            "FirstName",
+                            "LastName",
+                            "Age",
+                            "Email",
+                            "Phone"});
+                table4.AddRow(new string[] {
+                            "John",
+                            "Doe",
+                            "30",
+                            "john@example.com",
+                            "123-456-7890"});
+                table4.AddRow(new string[] {
+                            "Alice",
+                            "Smith",
+                            "25",
+                            "alice@example.com",
+                            "234-567-8901"});
+#line 35
+        await testRunner.GivenAsync("I have a table with multiple columns for async projection", ((string)(null)), table4, "Given ");
+#line hidden
+#line 39
+        await testRunner.WhenAsync("I select only the FirstName and Email columns asynchronously", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 40
+        await testRunner.ThenAsync("the async projected table should have 2 columns", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+#line 41
+        await testRunner.AndAsync("the projected columns should be FirstName and Email", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Create nested dynamic objects asynchronously")]
+        [Xunit.TraitAttribute("FeatureTitle", "AsyncSupport")]
+        [Xunit.TraitAttribute("Description", "Create nested dynamic objects asynchronously")]
+        public async System.Threading.Tasks.Task CreateNestedDynamicObjectsAsynchronously()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Create nested dynamic objects asynchronously", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 43
+    this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+                global::Reqnroll.Table table5 = new global::Reqnroll.Table(new string[] {
+                            "Entity",
+                            "Properties"});
+                table5.AddRow(new string[] {
+                            "User",
+                            "{\"Name\": \"John\", \"Age\": 30, \"Email\": \"john@example.com\"}"});
+                table5.AddRow(new string[] {
+                            "Address",
+                            "{\"Street\": \"Main St\", \"City\": \"New York\", \"ZipCode\": \"10001\"}"});
+#line 44
+        await testRunner.GivenAsync("I have a table with nested JSON data for async processing", ((string)(null)), table5, "Given ");
+#line hidden
+#line 48
+        await testRunner.WhenAsync("I create a nested dynamic object asynchronously", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 49
+        await testRunner.ThenAsync("the async User name should be John", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+#line 50
+        await testRunner.AndAsync("the async Address city should be New York", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();

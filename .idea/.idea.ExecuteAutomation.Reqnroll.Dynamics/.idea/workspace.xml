@@ -6,12 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="ee66ccf4-293e-4c10-91b9-8a4d7bfcf5bd" name="Changes" comment="Updated README.md">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ExecuteAutomation.Reqnroll.Dynamics/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ExecuteAutomation.Reqnroll.Dynamics/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/AsyncSupport.feature" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/AsyncSupport.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/AsyncSupport.feature.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/AsyncSupport.feature.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TableTransformationUtilities.feature.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TableTransformationUtilities.feature.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TestDynamicTableInstance.feature.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TestDynamicTableInstance.feature.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TestDynamicTableSet.feature.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TestDynamicTableSet.feature.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TestRandomTableData.feature.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TestRandomTableData.feature.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics/DynamicStepArgumentTransformations.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics/DynamicStepArgumentTransformations.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/StepDefinitions/AsyncSupportSteps.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/StepDefinitions/AsyncSupportSteps.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +73,7 @@
       <updated>1744677964641</updated>
       <workItem from="1744677965742" duration="4936000" />
       <workItem from="1744710402975" duration="1011000" />
-      <workItem from="1744711441886" duration="3269000" />
+      <workItem from="1744711441886" duration="4085000" />
     </task>
     <task id="LOCAL-00001" summary="Enhanced README with detailed features and usage instructions; added AutoFixture integration for dynamic data generation; updated project dependencies; created new test scenarios for dynamic table instances and random data generation.">
       <option name="closed" value="true" />
@@ -146,19 +147,6 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/StepDefinitions/AsyncSupportSteps.cs</url>
-          <line>24</line>
-          <properties documentPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/StepDefinitions/AsyncSupportSteps.cs" containingFunctionPresentation="Method 'GivenIHaveATableForAsyncProcessing'">
-            <startOffsets>
-              <option value="682" />
-            </startOffsets>
-            <endOffsets>
-              <option value="705" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/StepDefinitions/TableTransformationSteps.cs</url>
           <line>61</line>
           <properties documentPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/StepDefinitions/TableTransformationSteps.cs" containingFunctionPresentation="Method 'WhenISelectOnlyTheFirstNameAndEmailColumns'">
@@ -173,29 +161,16 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/StepDefinitions/AsyncSupportSteps.cs</url>
-          <line>38</line>
+          <line>40</line>
           <properties documentPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/StepDefinitions/AsyncSupportSteps.cs" containingFunctionPresentation="Method 'ThenTheAsyncDynamicInstanceShouldHavePropertyWithValue'">
             <startOffsets>
-              <option value="1328" />
+              <option value="1408" />
             </startOffsets>
             <endOffsets>
-              <option value="1419" />
+              <option value="1499" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/StepDefinitions/StepArgumentTransformationSteps.cs</url>
-          <line>117</line>
-          <properties documentPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/StepDefinitions/StepArgumentTransformationSteps.cs" containingFunctionPresentation="Method 'GivenIHaveAsyncData'">
-            <startOffsets>
-              <option value="3985" />
-            </startOffsets>
-            <endOffsets>
-              <option value="4039" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="6" />
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
