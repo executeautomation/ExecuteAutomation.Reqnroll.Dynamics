@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee66ccf4-293e-4c10-91b9-8a4d7bfcf5bd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TestDynamicTableInstance.feature.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TestDynamicTableInstance.feature.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TestDynamicTableSet.feature.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics.Specs/Features/TestDynamicTableSet.feature.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics/DynamicStepArgumentTransformations.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics/DynamicStepArgumentTransformations.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics/DynamicTableHelpers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ExecuteAutomation.Reqnroll.Dynamics/DynamicTableHelpers.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-    </list>
+    <list default="true" id="ee66ccf4-293e-4c10-91b9-8a4d7bfcf5bd" name="Changes" comment="Includes tests" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,7 +16,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Dynamic-data-generation-feature" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -45,20 +39,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;b9112955-bd15-4400-92a6-37817f678f16.executor&quot;: &quot;Debug&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "b9112955-bd15-4400-92a6-37817f678f16.executor": "Debug",
+    "git-widget-placeholder": "Table-Transformation-Utilities-And-Async-Support",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -69,7 +63,7 @@
       <updated>1744677964641</updated>
       <workItem from="1744677965742" duration="4936000" />
       <workItem from="1744710402975" duration="1011000" />
-      <workItem from="1744711441886" duration="1545000" />
+      <workItem from="1744711441886" duration="1852000" />
     </task>
     <task id="LOCAL-00001" summary="Enhanced README with detailed features and usage instructions; added AutoFixture integration for dynamic data generation; updated project dependencies; created new test scenarios for dynamic table instances and random data generation.">
       <option name="closed" value="true" />
@@ -79,7 +73,23 @@
       <option name="project" value="LOCAL" />
       <updated>1744693770496</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Table Transformation Utilities and Async Support">
+      <option name="closed" value="true" />
+      <created>1744744105940</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1744744105940</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Includes tests">
+      <option name="closed" value="true" />
+      <created>1744744129674</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1744744129674</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -101,7 +111,9 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Enhanced README with detailed features and usage instructions; added AutoFixture integration for dynamic data generation; updated project dependencies; created new test scenarios for dynamic table instances and random data generation." />
-    <option name="LAST_COMMIT_MESSAGE" value="Enhanced README with detailed features and usage instructions; added AutoFixture integration for dynamic data generation; updated project dependencies; created new test scenarios for dynamic table instances and random data generation." />
+    <MESSAGE value="Table Transformation Utilities and Async Support" />
+    <MESSAGE value="Includes tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="Includes tests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
