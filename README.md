@@ -1,68 +1,159 @@
-
 # ExecuteAutomation.Reqnroll.Dynamics
 
-**ExecuteAutomation.Reqnroll.Dynamics** is a powerful extension to enhance Reqnroll's Assist APIs, enabling seamless dynamic object creation and enhanced table manipulation for Reqnroll scenarios.
-
----
+A powerful library that enhances [Reqnroll](https://reqnroll.net/) (formerly SpecFlow) with dynamic data handling capabilities, simplifying how data is created and manipulated in Gherkin feature files.
 
 ## Features
 
-- **Dynamic Object Creation**: Convert Reqnroll tables directly into dynamic objects for simplified testing and validation.
-- **Enhanced Table Manipulation**: Effortlessly transform vertical tables into horizontal tables for more intuitive data handling.
-- **Customizable Behavior**: Fine-tune how the library processes Reqnroll tables for your specific testing needs.
+### Core Dynamic Table Capabilities
 
----
+- **Dynamic Instance Creation**: Convert tables to dynamic objects
+  ```csharp
+  dynamic data = table.CreateDynamicInstance();
+  ```
 
-## Installation
+- **Dynamic Set Creation**: Convert tables to collections of dynamic objects
+  ```csharp
+  var items = table.CreateDynamicSet();
+  ```
 
-To install **ExecuteAutomation.Reqnroll.Dynamics**, add the NuGet package to your project using one of the following methods:
+- **Dynamic Data Comparison**: Compare tables with dynamic objects or collections
+  ```csharp
+  table.CompareToDynamicInstance(instance);
+  table.CompareToDynamicSet(set);
+  ```
 
-### Package Manager
-```bash
-Install-Package ExecuteAutomation.Reqnroll.Dynamics
-```
+- **Step Argument Transformations**: Built-in transformations for automated conversion
+  ```csharp
+  // In step definitions, tables are automatically transformed
+  public void GivenTheFollowingUsers(IEnumerable<object> users) { ... }
+  public void GivenAUser(dynamic user) { ... }
+  ```
 
-### .NET CLI
+### AutoFixture Integration
+
+- **Random Data Generation**: Create tables with auto-generated test data
+  ```gherkin
+  Given users with the following details:
+    | Username    | Email      | DateOfBirth | PhoneNumber |
+    | auto.string | auto.email | auto.date   | auto.phone  |
+    | _           | _          | _           | _           |
+  ```
+
+- **Type Inference**: Automatic type detection from column names
+  ```gherkin
+  # The underscore (_) will infer appropriate data types based on column names
+  | Username | Email | DateOfBirth | PhoneNumber |
+  | _        | _     | _           | _           |
+  ```
+
+- **Supported Data Types**:
+  - `auto.string` - Random string values
+  - `auto.int` - Random integer values
+  - `auto.decimal`, `auto.double` - Random numeric values
+  - `auto.date`, `auto.datetime` - Random date/time values
+  - `auto.bool` - Random boolean values
+  - `auto.guid` - Random GUIDs
+  - `auto.email` - Random email addresses
+  - `auto.phone` - Random phone numbers
+  - `auto.url` - Random URLs
+  - `auto.name`, `auto.firstname`, `auto.lastname` - Random name values
+  - `auto.address` - Random street addresses
+  - `auto.city` - Random city names
+  - `auto.zipcode` - Random ZIP/postal codes
+
+- **Custom Entity Generation**: Register your own domain entity generators
+  ```csharp
+  // In test setup
+  AutoFixtureTableExtensions.RegisterEntityType<User>("user");
+  AutoFixtureTableExtensions.RegisterEntityType<Product>("product");
+  
+  // Custom generator with specific logic
+  AutoFixtureTableExtensions.RegisterEntityGenerator<PremiumUser>("premium-user", 
+    () => new PremiumUser { Level = "Gold", ... });
+  ```
+
+- **Usage in Step Definitions**:
+  ```csharp
+  [Given(@"users with the following details:")]
+  public void GivenUsersWithTheFollowingDetails(Table table)
+  {
+      var users = table.CreateDynamicSetWithAutoFixture();
+      // Process users...
+  }
+  ```
+
+## Getting Started
+
+### Installation
+
 ```bash
 dotnet add package ExecuteAutomation.Reqnroll.Dynamics
 ```
 
-### PackageReference
-Add the following line to your `.csproj` file:
-```xml
-<PackageReference Include="ExecuteAutomation.Reqnroll.Dynamics" Version="1.0.0" />
-```
+### Basic Usage
 
----
-
-## Usage
-
-### Dynamic Object Creation
-You can convert Reqnroll tables into dynamic objects effortlessly:
+1. Import the namespace in your step definition files:
 ```csharp
-var dynamicObject = table.CreateDynamicInstance();
+using ExecuteAutomation.Reqnroll.Dynamics;
 ```
 
-### Horizontal Table Transformation
-Transform vertical tables to horizontal tables for more intuitive handling:
+2. Use the extension methods on Reqnroll `Table` objects:
 ```csharp
-var horizontalTable = CreateHorizontalTable(verticalTable);
+[Given(@"the following products:")]
+public void GivenTheFollowingProducts(Table table)
+{
+    var products = table.CreateDynamicSet();
+    // Use products in your test...
+}
 ```
 
----
+### Using Random Data Generation
+
+1. Create feature files with auto-generated data:
+```gherkin
+Feature: User Registration
+
+Scenario: Register new users
+  Given users with the following details:
+    | Username    | Email      | DateOfBirth | PhoneNumber |
+    | auto.string | auto.email | auto.date   | auto.phone  |
+    | _           | _          | _           | _           |
+  When I register these users
+  Then all registrations should be successful
+```
+
+2. Register custom entity generators in your test setup:
+```csharp
+[BeforeTestRun]
+public static void SetupAutoFixture()
+{
+    AutoFixtureTableExtensions.RegisterEntityType<User>("user");
+    AutoFixtureTableExtensions.RegisterEntityType<Product>("product");
+}
+```
+
+## Advanced Scenarios
+
+### Vertical Tables
+
+The library supports vertical tables (2 columns with key-value pairs):
+
+```gherkin
+Given a user with details:
+  | Property   | Value       |
+  | Username   | johndoe     |
+  | Email      | auto.email  |
+  | DateOfBirth| 1990-01-01  |
+```
+
+### Type Conversion
+
+Automatic type conversion is performed for common data types:
+- Integers
+- Decimals/Doubles
+- Booleans
+- DateTimes
 
 ## Contributing
 
-Contributions are welcome! Fork this repository, create a branch, and submit a pull request with your changes.
-
----
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
----
-
-## Acknowledgments
-
-This project is a fork of the popular [Specflow.Assist.Dynamics](https://github.com/marcusoftnet/SpecFlow.Assist.Dynamic) package, with enhancements tailored for the **Reqnroll** community.
+Contributions are welcome! Please feel free to submit a Pull Request.
