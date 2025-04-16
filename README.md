@@ -105,6 +105,22 @@ A powerful library that enhances [Reqnroll](https://reqnroll.net/) (formerly Spe
     () => new PremiumUser { Level = "Gold", ... });
   ```
 
+- **Batch Entity Creation**: Generate multiple entities of a registered type
+  ```csharp
+  // Create 5 User entities
+  var users = AutoFixtureTableExtensions.CreateEntities("User", 5);
+  ```
+
+- **Async AutoFixture Support**: Async versions of all AutoFixture methods
+  ```csharp
+  // Async versions of methods
+  dynamic instance = await table.CreateDynamicInstanceWithAutoFixtureAsync();
+  var items = await table.CreateDynamicSetWithAutoFixtureAsync();
+  
+  // Batch entity creation async
+  var users = await AutoFixtureTableExtensions.CreateEntitiesAsync("User", 5);
+  ```
+
 - **Usage in Step Definitions**:
   ```csharp
   [Given(@"users with the following details:")]
@@ -177,7 +193,7 @@ dotnet add package ExecuteAutomation.Reqnroll.Dynamics
 ### PackageReference
 Add the following line to your `.csproj` file:
 ```xml
-<PackageReference Include="ExecuteAutomation.Reqnroll.Dynamics" Version="1.0.0" />
+<PackageReference Include="ExecuteAutomation.Reqnroll.Dynamics" Version="1.1.2" />
 ```
 
 ---

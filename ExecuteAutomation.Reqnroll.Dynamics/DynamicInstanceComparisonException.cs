@@ -59,6 +59,19 @@ public static class AutoFixtureTableExtensions
         throw new KeyNotFoundException($"No entity generator registered for '{entityName}'");
     }
     
+    // Async versions of entity operations
+    
+    public static async Task<IEnumerable<dynamic>> CreateEntitiesAsync(string entityTypeName, int count)
+    {
+        return await Task.Run(() => CreateEntities(entityTypeName, count));
+    }
+    
+    public static IEnumerable<dynamic> CreateEntities(string entityTypeName, int count)
+    {
+        var generator = GetEntityGenerator(entityTypeName);
+        return Enumerable.Range(0, count).Select(_ => generator());
+    }
+    
     // Add this extension method to the existing DynamicTableHelpers
     public static Table WithAutoFixtureData(this Table table)
     {
@@ -96,6 +109,25 @@ public static class AutoFixtureTableExtensions
     public static IEnumerable<dynamic> CreateDynamicSetWithAutoFixture(this Table table)
     {
         return table.WithAutoFixtureData().CreateDynamicSet();
+    }
+    
+    // Async implementations for AutoFixture integration
+    
+    public static async Task<Table> WithAutoFixtureDataAsync(this Table table)
+    {
+        return await Task.Run(() => WithAutoFixtureData(table));
+    }
+    
+    public static async Task<ExpandoObject> CreateDynamicInstanceWithAutoFixtureAsync(this Table table)
+    {
+        var transformedTable = await WithAutoFixtureDataAsync(table);
+        return await transformedTable.CreateDynamicInstanceAsync();
+    }
+    
+    public static async Task<IEnumerable<dynamic>> CreateDynamicSetWithAutoFixtureAsync(this Table table)
+    {
+        var transformedTable = await WithAutoFixtureDataAsync(table);
+        return await transformedTable.CreateDynamicSetAsync();
     }
     
     private static bool IsAutoFixtureMarker(string value)

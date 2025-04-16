@@ -15,7 +15,7 @@
         <PackageReleaseNotes>First Release of Reqnroll with Dynamic table supports</PackageReleaseNotes>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <Version>1.1.1</Version>
+        <Version>1.1.2</Version>
     </PropertyGroup>
 
     <ItemGroup>

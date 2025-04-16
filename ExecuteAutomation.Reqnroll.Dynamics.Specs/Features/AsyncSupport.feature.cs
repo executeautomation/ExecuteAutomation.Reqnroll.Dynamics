@@ -110,16 +110,16 @@ namespace ExecuteAutomation.Reqnroll.Dynamics.Specs.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table1 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table3 = new global::Reqnroll.Table(new string[] {
                             "Name",
                             "Age",
                             "Email"});
-                table1.AddRow(new string[] {
+                table3.AddRow(new string[] {
                             "John",
                             "30",
                             "john@example.com"});
 #line 6
-        await testRunner.GivenAsync("I have a table for async processing", ((string)(null)), table1, "Given ");
+        await testRunner.GivenAsync("I have a table for async processing", ((string)(null)), table3, "Given ");
 #line hidden
 #line 9
         await testRunner.WhenAsync("I create a dynamic instance asynchronously", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
@@ -153,24 +153,24 @@ namespace ExecuteAutomation.Reqnroll.Dynamics.Specs.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table2 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table4 = new global::Reqnroll.Table(new string[] {
                             "Name",
                             "Age",
                             "Status"});
-                table2.AddRow(new string[] {
+                table4.AddRow(new string[] {
                             "John",
                             "30",
                             "Active"});
-                table2.AddRow(new string[] {
+                table4.AddRow(new string[] {
                             "Alice",
                             "25",
                             "Inactive"});
-                table2.AddRow(new string[] {
+                table4.AddRow(new string[] {
                             "Bob",
                             "40",
                             "Active"});
 #line 14
-        await testRunner.GivenAsync("I have a table with multiple rows for async processing", ((string)(null)), table2, "Given ");
+        await testRunner.GivenAsync("I have a table with multiple rows for async processing", ((string)(null)), table4, "Given ");
 #line hidden
 #line 19
         await testRunner.WhenAsync("I create a dynamic set asynchronously", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
@@ -203,28 +203,28 @@ namespace ExecuteAutomation.Reqnroll.Dynamics.Specs.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table3 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table5 = new global::Reqnroll.Table(new string[] {
                             "Name",
                             "Age",
                             "Status"});
-                table3.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "John",
                             "30",
                             "Active"});
-                table3.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "Alice",
                             "25",
                             "Inactive"});
-                table3.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "Bob",
                             "40",
                             "Active"});
-                table3.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "Claire",
                             "35",
                             "Active"});
 #line 24
-        await testRunner.GivenAsync("I have a table with various statuses", ((string)(null)), table3, "Given ");
+        await testRunner.GivenAsync("I have a table with various statuses", ((string)(null)), table5, "Given ");
 #line hidden
 #line 30
         await testRunner.WhenAsync("I filter the rows asynchronously where Status is Active", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
@@ -257,26 +257,26 @@ namespace ExecuteAutomation.Reqnroll.Dynamics.Specs.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table4 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table6 = new global::Reqnroll.Table(new string[] {
                             "FirstName",
                             "LastName",
                             "Age",
                             "Email",
                             "Phone"});
-                table4.AddRow(new string[] {
+                table6.AddRow(new string[] {
                             "John",
                             "Doe",
                             "30",
                             "john@example.com",
                             "123-456-7890"});
-                table4.AddRow(new string[] {
+                table6.AddRow(new string[] {
                             "Alice",
                             "Smith",
                             "25",
                             "alice@example.com",
                             "234-567-8901"});
 #line 35
-        await testRunner.GivenAsync("I have a table with multiple columns for async projection", ((string)(null)), table4, "Given ");
+        await testRunner.GivenAsync("I have a table with multiple columns for async projection", ((string)(null)), table6, "Given ");
 #line hidden
 #line 39
         await testRunner.WhenAsync("I select only the FirstName and Email columns asynchronously", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
@@ -309,17 +309,17 @@ namespace ExecuteAutomation.Reqnroll.Dynamics.Specs.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table5 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table7 = new global::Reqnroll.Table(new string[] {
                             "Entity",
                             "Properties"});
-                table5.AddRow(new string[] {
+                table7.AddRow(new string[] {
                             "User",
                             "{\"Name\": \"John\", \"Age\": 30, \"Email\": \"john@example.com\"}"});
-                table5.AddRow(new string[] {
+                table7.AddRow(new string[] {
                             "Address",
                             "{\"Street\": \"Main St\", \"City\": \"New York\", \"ZipCode\": \"10001\"}"});
 #line 44
-        await testRunner.GivenAsync("I have a table with nested JSON data for async processing", ((string)(null)), table5, "Given ");
+        await testRunner.GivenAsync("I have a table with nested JSON data for async processing", ((string)(null)), table7, "Given ");
 #line hidden
 #line 48
         await testRunner.WhenAsync("I create a nested dynamic object asynchronously", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
