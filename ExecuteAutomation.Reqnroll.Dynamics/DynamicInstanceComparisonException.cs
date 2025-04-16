@@ -11,7 +11,7 @@ public class DynamicInstanceComparisonException : Exception
     public DynamicInstanceComparisonException(IList<string> diffs)
         : base("There were some difference between the table and the instance")
     {
-        Differences = diffs;
+        Differences = diffs ?? new List<string>();
     }
 
     public IList<string> Differences { get; private set; }
@@ -20,9 +20,9 @@ public class DynamicInstanceComparisonException : Exception
 
 public static class AutoFixtureTableExtensions
 {
-    private static readonly Fixture _fixture = new Fixture();
-    private static readonly Regex _autoFixturePattern = new Regex(@"auto\.(\w+)(?:\(([^)]*)\))?", RegexOptions.Compiled);
-    private static readonly Dictionary<string, Func<object>> _entityGenerators = new Dictionary<string, Func<object>>(StringComparer.OrdinalIgnoreCase);
+    private static readonly Fixture _fixture = new();
+    private static readonly Regex _autoFixturePattern = new(@"auto\.(\w+)(?:\(([^)]*)\))?", RegexOptions.Compiled);
+    private static readonly Dictionary<string, Func<object>> _entityGenerators = new(StringComparer.OrdinalIgnoreCase);
     
     static AutoFixtureTableExtensions()
     {
@@ -39,24 +39,57 @@ public static class AutoFixtureTableExtensions
     // Allow consumers to register their own entity generators
     public static void RegisterEntityGenerator<T>(string entityName, Func<T> generator) where T : class
     {
+        if (string.IsNullOrEmpty(entityName))
+        {
+            throw new ArgumentNullException(nameof(entityName), "Entity name cannot be null or empty");
+        }
+        
+        if (generator == null)
+        {
+            throw new ArgumentNullException(nameof(generator), "Generator cannot be null");
+        }
+        
         _entityGenerators[entityName] = () => generator();
     }
     
     // Register an entity type to be created with AutoFixture
     public static void RegisterEntityType<T>(string entityName) where T : class
     {
+        if (string.IsNullOrEmpty(entityName))
+        {
+            throw new ArgumentNullException(nameof(entityName), "Entity name cannot be null or empty");
+        }
+        
         _entityGenerators[entityName] = () => _fixture.Create<T>();
     }
     
     // Get a registered entity generator
     public static Func<object> GetEntityGenerator(string entityName)
     {
+        if (string.IsNullOrEmpty(entityName))
+        {
+            throw new ArgumentNullException(nameof(entityName), "Entity name cannot be null or empty");
+        }
+        
         if (_entityGenerators.TryGetValue(entityName, out var generator))
         {
             return generator;
         }
         
         throw new KeyNotFoundException($"No entity generator registered for '{entityName}'");
+    }
+    
+    // Async versions of entity operations
+    
+    public static async Task<IEnumerable<dynamic>> CreateEntitiesAsync(string entityTypeName, int count)
+    {
+        return await Task.Run(() => CreateEntities(entityTypeName, count));
+    }
+    
+    public static IEnumerable<dynamic> CreateEntities(string entityTypeName, int count)
+    {
+        var generator = GetEntityGenerator(entityTypeName);
+        return Enumerable.Range(0, count).Select(_ => generator());
     }
     
     // Add this extension method to the existing DynamicTableHelpers
@@ -98,6 +131,25 @@ public static class AutoFixtureTableExtensions
         return table.WithAutoFixtureData().CreateDynamicSet();
     }
     
+    // Async implementations for AutoFixture integration
+    
+    public static async Task<Table> WithAutoFixtureDataAsync(this Table table)
+    {
+        return await Task.Run(() => WithAutoFixtureData(table));
+    }
+    
+    public static async Task<ExpandoObject> CreateDynamicInstanceWithAutoFixtureAsync(this Table table)
+    {
+        var transformedTable = await WithAutoFixtureDataAsync(table);
+        return await transformedTable.CreateDynamicInstanceAsync();
+    }
+    
+    public static async Task<IEnumerable<dynamic>> CreateDynamicSetWithAutoFixtureAsync(this Table table)
+    {
+        var transformedTable = await WithAutoFixtureDataAsync(table);
+        return await transformedTable.CreateDynamicSetAsync();
+    }
+    
     private static bool IsAutoFixtureMarker(string value)
     {
         return !string.IsNullOrEmpty(value) && 
@@ -106,6 +158,11 @@ public static class AutoFixtureTableExtensions
     
     private static string GenerateWithAutoFixture(string marker, string header)
     {
+        if (string.IsNullOrEmpty(marker) || string.IsNullOrEmpty(header))
+        {
+            return string.Empty;
+        }
+        
         if (marker == "_")
         {
             // Infer type from header name
@@ -385,26 +442,25 @@ public static class AutoFixtureTableExtensions
 public class EmailAddress
 {
     public string Address => $"{_fixture.Create<string>().Replace(" ", "")}@example.com";
-    private static readonly Fixture _fixture = new Fixture();
+    private static readonly Fixture _fixture = new();
 }
 
 public class PhoneNumber
 {
-    
-    string part1 = (_fixture.Create<int>() % 100).ToString("D2");
-    string part2 = (_fixture.Create<int>() % 1000).ToString("D3");
-    string part3 = (_fixture.Create<int>() % 10000).ToString("D4");
+    private readonly string _part1 = (_fixture.Create<int>() % 100).ToString("D2");
+    private readonly string _part2 = (_fixture.Create<int>() % 1000).ToString("D3");
+    private readonly string _part3 = (_fixture.Create<int>() % 10000).ToString("D4");
 
-    public string Number => $"{part1}{part2}{part3}";
-    private static readonly Fixture _fixture = new Fixture();
+    public string Number => $"{_part1}{_part2}{_part3}";
+    private static readonly Fixture _fixture = new();
 }
 
 // Additional custom types...
 public class PersonName
 {
-    private static readonly Fixture _fixture = new Fixture();
-    private static readonly string[] _firstNames = new[] { "John", "Jane", "Robert", "Mary", "David", "Lisa" };
-    private static readonly string[] _lastNames = new[] { "Smith", "Johnson", "Williams", "Brown", "Jones", "Miller" };
+    private static readonly Fixture _fixture = new();
+    private static readonly string[] _firstNames = { "John", "Jane", "Robert", "Mary", "David", "Lisa" };
+    private static readonly string[] _lastNames = { "Smith", "Johnson", "Williams", "Brown", "Jones", "Miller" };
     
     public string First => _firstNames[_fixture.Create<int>() % _firstNames.Length];
     public string Last => _lastNames[_fixture.Create<int>() % _lastNames.Length];
@@ -414,7 +470,7 @@ public class PersonName
 
 public class StreetAddress
 {
-    private static readonly Fixture _fixture = new Fixture();
+    private static readonly Fixture _fixture = new();
     
     public string Street => $"{_fixture.Create<int>() % 9999 + 1} {_fixture.Create<string>()} St.";
     
@@ -423,15 +479,15 @@ public class StreetAddress
 
 public class City
 {
-    private static readonly Fixture _fixture = new Fixture();
-    private static readonly string[] _cities = new[] { "New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia" };
+    private static readonly Fixture _fixture = new();
+    private static readonly string[] _cities = { "New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia" };
     
     public string Name => _cities[_fixture.Create<int>() % _cities.Length];
 }
 
 public class ZipCode
 {
-    private static readonly Fixture _fixture = new Fixture();
+    private static readonly Fixture _fixture = new();
     
     public string Code => $"{_fixture.Create<int>() % 90000 + 10000}";
     

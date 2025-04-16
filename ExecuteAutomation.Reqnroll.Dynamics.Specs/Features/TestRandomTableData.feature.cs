@@ -112,14 +112,14 @@ namespace ExecuteAutomation.Reqnroll.Dynamics.Specs.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table11 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table13 = new global::Reqnroll.Table(new string[] {
                             "Username",
                             "Email",
                             "DateOfBirth",
                             "Phone",
                             "Guid",
                             "Zipcode"});
-                table11.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "auto.string",
                             "auto.email",
                             "auto.date",
@@ -127,7 +127,7 @@ namespace ExecuteAutomation.Reqnroll.Dynamics.Specs.Features
                             "auto.guid",
                             "auto.zipcode"});
 #line 7
-        await testRunner.GivenAsync("users with the following details:", ((string)(null)), table11, "Given ");
+        await testRunner.GivenAsync("users with the following details:", ((string)(null)), table13, "Given ");
 #line hidden
 #line 10
         await testRunner.ThenAsync("the username should be a valid string", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -168,14 +168,14 @@ namespace ExecuteAutomation.Reqnroll.Dynamics.Specs.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table12 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table14 = new global::Reqnroll.Table(new string[] {
                             "Username",
                             "Email",
                             "DateOfBirth",
                             "Phone",
                             "Guid",
                             "Zipcode"});
-                table12.AddRow(new string[] {
+                table14.AddRow(new string[] {
                             "_",
                             "_",
                             "_",
@@ -183,7 +183,7 @@ namespace ExecuteAutomation.Reqnroll.Dynamics.Specs.Features
                             "_",
                             "_"});
 #line 18
-        await testRunner.GivenAsync("users with the following details:", ((string)(null)), table12, "Given ");
+        await testRunner.GivenAsync("users with the following details:", ((string)(null)), table14, "Given ");
 #line hidden
 #line 21
         await testRunner.ThenAsync("the user set should contain 1 user", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -233,28 +233,28 @@ namespace ExecuteAutomation.Reqnroll.Dynamics.Specs.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table13 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table15 = new global::Reqnroll.Table(new string[] {
                             "Username",
                             "Email",
                             "DateOfBirth",
                             "Phone",
                             "Guid",
                             "Zipcode"});
-                table13.AddRow(new string[] {
+                table15.AddRow(new string[] {
                             "_",
                             "_",
                             "_",
                             "_",
                             "_",
                             "_"});
-                table13.AddRow(new string[] {
+                table15.AddRow(new string[] {
                             "_",
                             "_",
                             "_",
                             "_",
                             "_",
                             "_"});
-                table13.AddRow(new string[] {
+                table15.AddRow(new string[] {
                             "_",
                             "_",
                             "_",
@@ -262,7 +262,7 @@ namespace ExecuteAutomation.Reqnroll.Dynamics.Specs.Features
                             "_",
                             "_"});
 #line 32
-        await testRunner.GivenAsync("users with the following details:", ((string)(null)), table13, "Given ");
+        await testRunner.GivenAsync("users with the following details:", ((string)(null)), table15, "Given ");
 #line hidden
 #line 37
         await testRunner.ThenAsync("the user set should contain 3 users", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -312,7 +312,7 @@ namespace ExecuteAutomation.Reqnroll.Dynamics.Specs.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table14 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table16 = new global::Reqnroll.Table(new string[] {
                             "StringValue",
                             "IntValue",
                             "BoolValue",
@@ -330,7 +330,7 @@ namespace ExecuteAutomation.Reqnroll.Dynamics.Specs.Features
                             "LastNameValue",
                             "StringListValue",
                             "IntListValue"});
-                table14.AddRow(new string[] {
+                table16.AddRow(new string[] {
                             "auto.string",
                             "auto.int",
                             "auto.bool",
@@ -349,7 +349,7 @@ namespace ExecuteAutomation.Reqnroll.Dynamics.Specs.Features
                             "auto.stringlist",
                             "auto.intlist"});
 #line 48
-        await testRunner.GivenAsync("users with the following details:", ((string)(null)), table14, "Given ");
+        await testRunner.GivenAsync("users with the following details:", ((string)(null)), table16, "Given ");
 #line hidden
 #line 51
         await testRunner.ThenAsync("all auto-generated fields should have valid values", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");

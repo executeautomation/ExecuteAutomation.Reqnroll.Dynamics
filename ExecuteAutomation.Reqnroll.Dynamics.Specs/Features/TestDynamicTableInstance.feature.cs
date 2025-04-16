@@ -112,16 +112,16 @@ namespace ExecuteAutomation.Reqnroll.Dynamics.Specs.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table9 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table11 = new global::Reqnroll.Table(new string[] {
                             "Number",
                             "Value",
                             "Output"});
-                table9.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             "First",
                             "50",
                             "50"});
 #line 7
-        await testRunner.GivenAsync("the numbers are in dynamic instance table like", ((string)(null)), table9, "Given ");
+        await testRunner.GivenAsync("the numbers are in dynamic instance table like", ((string)(null)), table11, "Given ");
 #line hidden
 #line 10
         await testRunner.AndAsync("the second number is 70", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");

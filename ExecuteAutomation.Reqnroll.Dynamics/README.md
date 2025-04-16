@@ -123,6 +123,26 @@ Given I have a product with the following details
   | auto.string | auto.decimal | auto.stringlist| auto.intlist      |
 ```
 
+### Async Support
+The library provides async versions of all methods for better performance in I/O bound scenarios:
+
+```csharp
+// Create a dynamic instance asynchronously
+var instance = await table.CreateDynamicInstanceAsync();
+
+// Create a dynamic set asynchronously
+var set = await table.CreateDynamicSetAsync();
+
+// Create a dynamic instance with AutoFixture asynchronously
+var autoFixtureInstance = await table.CreateDynamicInstanceWithAutoFixtureAsync();
+
+// Create a dynamic set with AutoFixture asynchronously
+var autoFixtureSet = await table.CreateDynamicSetWithAutoFixtureAsync();
+
+// Create entities asynchronously
+var entities = await AutoFixtureTableExtensions.CreateEntitiesAsync("User", 5);
+```
+
 ---
 
 ## Contributing
