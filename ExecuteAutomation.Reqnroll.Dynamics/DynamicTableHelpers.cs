@@ -141,17 +141,23 @@ public static class DynamicTableHelpers
     private static object GetRowValue(int rowIndex, Table table, string memberName, out string currentHeader,
         bool doTypeConversion = true)
     {
-        object rowValue = null;
+        object? rowValue = null;
         currentHeader = string.Empty;
-        foreach (var header in table.Header)
-            if (CreatePropertyName(header) == memberName)
+        
+        if (table?.Header != null)
+        {
+            foreach (var header in table.Header)
             {
-                currentHeader = header;
-                rowValue = CreateTypedValue(table.Rows[rowIndex][header], doTypeConversion);
-                break;
+                if (CreatePropertyName(header) == memberName)
+                {
+                    currentHeader = header;
+                    rowValue = CreateTypedValue(table.Rows[rowIndex][header], doTypeConversion);
+                    break;
+                }
             }
+        }
 
-        return rowValue;
+        return rowValue ?? string.Empty;
     }
 
     private static void AssertValuesOfRowDifference(DataTableRow tableRow, dynamic instance,
@@ -184,10 +190,23 @@ public static class DynamicTableHelpers
     {
         var valueDiffs = new List<string>();
 
+        if (tableRow == null || instance == null)
+        {
+            valueDiffs.Add("Table row or instance is null");
+            return valueDiffs;
+        }
+
         foreach (var header in tableRow.Keys)
         {
             var propertyName = CreatePropertyName(header);
             var valueFromInstance = Dynamic.InvokeGet(instance, propertyName);
+            
+            if (valueFromInstance == null)
+            {
+                valueDiffs.Add($"Property '{propertyName}' value is null in the instance");
+                continue;
+            }
+            
             var typeFromInstance = valueFromInstance.GetType().Name;
             var valueFromTable = CreateTypedValue(tableRow[header], doTypeConversion);
             var typeFromTable = valueFromTable.GetType().Name;
@@ -206,10 +225,16 @@ public static class DynamicTableHelpers
     private static IList<string> GetPropertyNameDifferences(IEnumerable<string> tableHeadersAsPropertyNames,
         IEnumerable<string> instanceMembers)
     {
+        var diffs = new List<string>();
+        
+        if (tableHeadersAsPropertyNames == null || instanceMembers == null)
+        {
+            diffs.Add("Table headers or instance members are null");
+            return diffs;
+        }
+
         var allMembersInTableButNotInInstance = tableHeadersAsPropertyNames.Except(instanceMembers);
         var allMembersInInstanceButNotInTable = instanceMembers.Except(tableHeadersAsPropertyNames);
-
-        var diffs = new List<string>();
 
         diffs.AddRange(
             allMembersInInstanceButNotInTable.Select(
