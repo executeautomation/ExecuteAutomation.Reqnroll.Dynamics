@@ -30,7 +30,7 @@ dotnet add package ExecuteAutomation.Reqnroll.Dynamics
 ### PackageReference
 Add the following line to your `.csproj` file:
 ```xml
-<PackageReference Include="ExecuteAutomation.Reqnroll.Dynamics" Version="1.0.0" />
+<PackageReference Include="ExecuteAutomation.Reqnroll.Dynamics" Version="1.1.2" />
 ```
 
 ---
